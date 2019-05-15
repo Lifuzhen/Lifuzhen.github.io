@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.4.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="学会这两件事，让你成为 Git 老司机(这个文章的原文我找不到了，没有办法给各位放上原文链接了)  我在提交中犯了个错误，我如何修正它？我的提交历史一团糟，我该如何让它更整洁？ 如果你曾经有上述问题，那么这篇文章很适合你。这篇文章介绍了一个让你成为 Git 老司机的清单。">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学会这两件事，让你成为Git老司机">
+<meta property="og:url" content="https://Lifuzhen.github.io/2019/02/13/学会这两件事，让你成为Git老司机/index.html">
+<meta property="og:site_name" content="lifuzhen">
+<meta property="og:description" content="学会这两件事，让你成为 Git 老司机(这个文章的原文我找不到了，没有办法给各位放上原文链接了)  我在提交中犯了个错误，我如何修正它？我的提交历史一团糟，我该如何让它更整洁？ 如果你曾经有上述问题，那么这篇文章很适合你。这篇文章介绍了一个让你成为 Git 老司机的清单。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://lifuzhen.github.io/2019/02/13/学会这两件事，让你成为Git老司机/00.jpg">
+<meta property="og:image" content="https://lifuzhen.github.io/2019/02/13/学会这两件事，让你成为Git老司机/error.jpg">
+<meta property="og:image" content="https://lifuzhen.github.io/2019/02/13/学会这两件事，让你成为Git老司机/01.jpg">
+<meta property="og:image" content="https://lifuzhen.github.io/2019/02/13/学会这两件事，让你成为Git老司机/02.jpg">
+<meta property="og:image" content="https://lifuzhen.github.io/2019/02/13/学会这两件事，让你成为Git老司机/03.jpg">
+<meta property="og:updated_time" content="2019-05-15T03:59:53.130Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学会这两件事，让你成为Git老司机">
+<meta name="twitter:description" content="学会这两件事，让你成为 Git 老司机(这个文章的原文我找不到了，没有办法给各位放上原文链接了)  我在提交中犯了个错误，我如何修正它？我的提交历史一团糟，我该如何让它更整洁？ 如果你曾经有上述问题，那么这篇文章很适合你。这篇文章介绍了一个让你成为 Git 老司机的清单。">
+<meta name="twitter:image" content="https://lifuzhen.github.io/2019/02/13/学会这两件事，让你成为Git老司机/00.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="lifuzhen" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="https://Lifuzhen.github.io/2019/02/13/学会这两件事，让你成为Git老司机/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>学会这两件事，让你成为Git老司机 | lifuzhen</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lifuzhen</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">梦想的起源</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://Lifuzhen.github.io/2019/02/13/学会这两件事，让你成为Git老司机/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lifuzhen">
+      <meta itemprop="description" content="不积跬步，无以至千里">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lifuzhen">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">学会这两件事，让你成为Git老司机
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-13 18:03:48" itemprop="dateCreated datePublished" datetime="2019-02-13T18:03:48+08:00">2019-02-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-15 11:59:53" itemprop="dateModified" datetime="2019-05-15T11:59:53+08:00">2019-05-15</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>学会这两件事，让你成为 Git 老司机(这个文章的原文我找不到了，没有办法给各位放上原文链接了)</p>
+<p><img src="/2019/02/13/学会这两件事，让你成为Git老司机/00.jpg" alt="00"></p>
+<p>我在提交中犯了个错误，我如何修正它？<br>我的提交历史一团糟，我该如何让它更整洁？</p>
+<p>如果你曾经有上述问题，那么这篇文章很适合你。这篇文章介绍了一个让你成为 Git 老司机的清单。<br><a id="more"></a></p>
+<blockquote>
+<p>我在提交中犯了个错误，我该怎么办？</p>
+</blockquote>
+<p><img src="/2019/02/13/学会这两件事，让你成为Git老司机/error.jpg" alt="00"></p>
+<h3 id="情景-1"><a href="#情景-1" class="headerlink" title="情景 1"></a>情景 1</h3><p>假设你已经提交了一堆文件，并发现输入的提交信息实际上并不清晰。现在你要更改提交消息。为此，你可以使用 git commit –amend：</p>
+<p><code>git commit --amend -m “New commit message”</code></p>
+<h3 id="场景-2"><a href="#场景-2" class="headerlink" title="场景 2"></a>场景 2</h3><p>假设你要提交六个文件，但你最终错误地只提交了五个文件。你可能认为可以创建新提交并将第六个文件添加到该提交。<br>这种方法没错。但是，为了保持整洁的提交历史，如果你可以以某种方式将此文件加入到你之前的提交本身，那岂不是更好？这也可以通过 git commit –amend 完成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add file6</span><br><span class="line">git commit --amend --no-edit</span><br></pre></td></tr></table></figure>
+<p>–no-edit 表示提交信息不会更改。</p>
+<h3 id="场景-3"><a href="#场景-3" class="headerlink" title="场景 3"></a>场景 3</h3><p>无论你何时在 Git 进行提交，提交都会附上作者名称和作者电子邮箱。通常，当你第一次配置 Git 时，就需要设置作者和电子邮箱。你无需担心每次提交的作者详细信息。<br>也就是说，对于特定项目，你可能希望使用不同的电子邮箱 ID。你需要使用以下命令为该项目配置电子邮箱 ID：</p>
+<p><code>git config user.email “your email id”</code></p>
+<p>假设你忘记配置电子邮箱，并且已经完成了第一次提交。amend 命令也可以用于更改先前提交的作者消息。可以使用以下命令更改提交的作者信息：</p>
+<p><code>git commit --amend --author &quot;Author Name &lt;Author Email&gt;&quot;</code></p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>应该仅在本地仓库使用 amend 命令。在远端仓库使用 amend 命令会制造大量混乱。</p>
+<blockquote>
+<p>我的提交历史一团糟，我该如何处理？</p>
+</blockquote>
+<p>假设你正在处理一段代码。你知道代码大约需要十天完成。在这十天内，其他开发人员也将提交代码到远程仓库。<br>将本地仓库代码与远程仓库代码保持同步是个很好的做法。这在你拉取请求时会避免许多合并冲突的操作。因此，你应该每两天从远程仓库中拉取一个变更。<br>每次将代码从远程仓库拉取到本地仓库时，都会在本地操作中创建新的合并提交。这意味着你的本地历史提交记录会有大量的合并提交，这会让审阅人员头大。</p>
+<p><img src="/2019/02/13/学会这两件事，让你成为Git老司机/01.jpg" alt="01"></p>
+<p>上面是历史提交记录在本地仓库中的显示方式。</p>
+<h4 id="如何让历史提交记录看起来更整洁？"><a href="#如何让历史提交记录看起来更整洁？" class="headerlink" title="如何让历史提交记录看起来更整洁？"></a>如何让历史提交记录看起来更整洁？</h4><p>这就需要用到 rebase 了。</p>
+<p>什么是变基（rebase）？</p>
+<h3 id="举个🌰"><a href="#举个🌰" class="headerlink" title="举个🌰"></a>举个🌰</h3><p><img src="/2019/02/13/学会这两件事，让你成为Git老司机/02.jpg" alt="02"></p>
+<p>此图显示了发布（release）分支和功能（feature）分支中的提交。<br>1.发布分支有三个提交：Rcommit1、Rcommit2 和 Rcommit3。<br>2.你在发布分支中仅有一个提交（即 Rcommit1）时，创建了功能分支。<br>3.你已向功能分支添加了两个提交。它们是 Fcommit1 和 Fcommit2。<br>4.你希望从发布分支提交到功能分支中。<br>5.你可以使用变基来完成该操作。<br>6.让发布分支命名为 release，让功能分支命名为 feature。<br>7.可以使用以下命令进行变基：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout feature</span><br><span class="line">git rebase release</span><br></pre></td></tr></table></figure></p>
+<h3 id="变基（rebase）"><a href="#变基（rebase）" class="headerlink" title="变基（rebase）"></a>变基（rebase）</h3><p>当执行变基时，你的目标是确保功能分支从发布分支获取最新代码。<br>变基命令尝试逐个添加每个提交，并检查冲突。这听起来是不是有点头大？<br>让我画个图帮助理解。<br>这显示了变基内部实际做的事情：</p>
+<p><img src="/2019/02/13/学会这两件事，让你成为Git老司机/03.jpg" alt="03"></p>
+<p>第 1 步</p>
+<pre><code>1.运行该命令的那一刻，功能分支指向发布分支的头部。
+2.现在，功能分支有三个提交，Rcommit1、Rcommit2 和 Rcommit3。
+3.你可能想知道 Rcommit1 和 Rcommit2 发生了什么？
+4.提交仍然存在，将在下面步骤中使用。
+</code></pre><p>第 2 步</p>
+<pre><code>1.现在 Git 尝试将 Fcommit1 添加到功能分支上。
+2.如果没有冲突，则在 Rcommit3 之后添加 Fcommit1；
+3.如果存在冲突，Git 会通知你，你必须手动解决冲突。解决冲突后，使用以下命令继续变基：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add fixedfile</span><br><span class="line">git rebase --continue</span><br></pre></td></tr></table></figure>
+</code></pre><p>第 3 步</p>
+<pre><code>1.一旦添加了 Fcommit1，Git 将尝试添加 Fcommit2。
+2.同样，如果没有冲突，则在 Fcommit1 之后添加 Fcommit2，并且变基成功。
+3.如果存在冲突，Git 会通知你，你必须手动解决。解决冲突后，使用第 2 步提到的相同命令。
+4.整个变基完成后，你会发现功能分支有 Rcommit1、Rcommit2、Rcommit3、Fcommit1 和 Fcommit2。
+</code></pre><h3 id="注意事项-1"><a href="#注意事项-1" class="headerlink" title="注意事项"></a>注意事项</h3><blockquote>
+<p>1.变基和合并（merge）在 Git 中都很有用。两种并无优劣之分。<br>2.在合并的情况下，你将有个合并提交。在变基的情况下，不会像合并提交那样有额外的提交。<br>3.一种最佳的实践是一分为二。使用远端仓库中的最新代码更新本地仓库时，请使用变基。在处理拉取请求，以将功能分支和发布分支或主分支合并时，请使用合并。<br>4.将功能分支和发布分支或主分支合并时，请使用合并。使用变基会更改历史提交记录（使其更整洁）。但话虽如此，改变历史提交存在风险。因此，请确保永远不要对远程存储仓库的代码使用变基。始终仅对本地仓库代码使用变基，来更改历史提交记录。<br>5.如果对远端仓库进行变基，会制造许多混乱，因为其他开发人员无法识别新的历史记录。<br>6.此外，如果在远端仓库上完成变基，则当其他开发人员尝试从远端仓库中拉取最新代码时，就可能会出问题。所以，我再重申一遍，变基总是仅在本地仓库中进行。😃</p>
+</blockquote>
+<p>恭喜</p>
+<p>你现在是个 Git 老司机了。😃</p>
+<p>在这篇文章中，你了解到：</p>
+<ul>
+<li>修改提交记录</li>
+<li>变基</li>
+</ul>
+<p>这两个都是非常实用的概念。探索 Git 的世界，继续学习吧。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/git/" rel="tag"># git</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/11/Object-keys方法之详解/" rel="next" title="Object.keys方法之详解">
+                <i class="fa fa-chevron-left"></i> Object.keys方法之详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="lifuzhen" />
+            
+              <p class="site-author-name" itemprop="name">lifuzhen</p>
+              <p class="site-description motion-element" itemprop="description">不积跬步，无以至千里</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Lifuzhen" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/fuzhen66" target="_blank" title="微博"><i class="fa fa-fw fa-weibo"></i>微博</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#情景-1"><span class="nav-number">1.</span> <span class="nav-text">情景 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#场景-2"><span class="nav-number">2.</span> <span class="nav-text">场景 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#场景-3"><span class="nav-number">3.</span> <span class="nav-text">场景 3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项"><span class="nav-number">4.</span> <span class="nav-text">注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#如何让历史提交记录看起来更整洁？"><span class="nav-number">4.1.</span> <span class="nav-text">如何让历史提交记录看起来更整洁？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#举个🌰"><span class="nav-number">5.</span> <span class="nav-text">举个🌰</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变基（rebase）"><span class="nav-number">6.</span> <span class="nav-text">变基（rebase）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项-1"><span class="nav-number">7.</span> <span class="nav-text">注意事项</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lifuzhen</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
