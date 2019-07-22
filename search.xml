@@ -3,6 +3,30 @@
   
     
     <entry>
+      <title>Git常用命令速查表</title>
+      <link href="/2019/07/22/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5%E8%A1%A8/"/>
+      <url>/2019/07/22/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5%E8%A1%A8/</url>
+      <content type="html"><![CDATA[<p>Git常用命令速查表</p><a id="more"></a><h5 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git clone &lt;url&gt;                  #克隆远程版本库</span><br><span class="line">$ git init                         #初始化本地版本库</span><br></pre></td></tr></table></figure><h5 id="修改和提交"><a href="#修改和提交" class="headerlink" title="修改和提交"></a>修改和提交</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ git status                       #查看状态</span><br><span class="line">$ git diff                         #查看变更内容</span><br><span class="line">$ git add .                        #跟踪所有改动过的文件</span><br><span class="line">$ git add &lt;file&gt;                   #跟踪指定的文件</span><br><span class="line">$ git mv &lt;old&gt;&lt;new&gt;                #文件改名</span><br><span class="line">$ git rm&lt;file&gt;                     #删除文件</span><br><span class="line">$ git rm --cached&lt;file&gt;            #停止跟踪文件但不删除</span><br><span class="line">$ git commit -m &quot;commit messages&quot;  #提交所有更新过的文件</span><br><span class="line">$ git commit --amend               #修改最后一次改动</span><br></pre></td></tr></table></figure><h5 id="查看提交历史"><a href="#查看提交历史" class="headerlink" title="查看提交历史"></a>查看提交历史</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git log                    #查看提交历史</span><br><span class="line">$ git log -p &lt;file&gt;          #查看指定文件的提交历史</span><br><span class="line">$ git blame &lt;file&gt;           #以列表方式查看指定文件的提交历史</span><br></pre></td></tr></table></figure><h5 id="撤销"><a href="#撤销" class="headerlink" title="撤销"></a>撤销</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git reset --hard HEAD      #撤销工作目录中所有未提交文件的修改内容</span><br><span class="line">$ git checkout HEAD &lt;file&gt;   #撤销指定的未提交文件的修改内容</span><br><span class="line">$ git revert &lt;commit&gt;        #撤销指定的提交</span><br><span class="line">$ git log --before=&quot;1 days&quot;  #退回到之前1天的版本</span><br></pre></td></tr></table></figure><h5 id="分支与标签"><a href="#分支与标签" class="headerlink" title="分支与标签"></a>分支与标签</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git branch                   #显示所有本地分支</span><br><span class="line">$ git checkout &lt;branch/tag&gt;    #切换到指定分支和标签</span><br><span class="line">$ git branch &lt;new-branch&gt;      #创建新分支</span><br><span class="line">$ git branch -d &lt;branch&gt;       #删除本地分支</span><br><span class="line">$ git tag                      #列出所有本地标签</span><br><span class="line">$ git tag &lt;tagname&gt;            #基于最新提交创建标签</span><br><span class="line">$ git tag -d &lt;tagname&gt;         #删除标签</span><br></pre></td></tr></table></figure><h5 id="合并与衍合"><a href="#合并与衍合" class="headerlink" title="合并与衍合"></a>合并与衍合</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git merge &lt;branch&gt;        #合并指定分支到当前分支</span><br><span class="line">$ git rebase &lt;branch&gt;       #衍合指定分支到当前分支</span><br></pre></td></tr></table></figure><h5 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作"></a>远程操作</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git remote -v                   #查看远程版本库信息</span><br><span class="line">$ git remote show &lt;remote&gt;        #查看指定远程版本库信息</span><br><span class="line">$ git remote add &lt;remote&gt; &lt;url&gt;   #添加远程版本库</span><br><span class="line">$ git fetch &lt;remote&gt;              #从远程库获取代码</span><br><span class="line">$ git pull &lt;remote&gt; &lt;branch&gt;      #下载代码及快速合并</span><br><span class="line">$ git push &lt;remote&gt; &lt;branch&gt;      #上传代码及快速合并</span><br><span class="line">$ git push &lt;remote&gt; :&lt;branch/tag-name&gt;  #删除远程分支或标签</span><br><span class="line">$ git push --tags                       #上传所有标签</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>create-react-app创建项目并用git上传至GitHub及展示预览效果</title>
+      <link href="/2019/07/16/create-react-app%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E5%B9%B6%E7%94%A8git%E4%B8%8A%E4%BC%A0%E8%87%B3GitHub%E5%8F%8A%E5%B1%95%E7%A4%BA%E9%A2%84%E8%A7%88%E6%95%88%E6%9E%9C/"/>
+      <url>/2019/07/16/create-react-app%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E5%B9%B6%E7%94%A8git%E4%B8%8A%E4%BC%A0%E8%87%B3GitHub%E5%8F%8A%E5%B1%95%E7%A4%BA%E9%A2%84%E8%A7%88%E6%95%88%E6%9E%9C/</url>
+      <content type="html"><![CDATA[<p>create-react-app创建项目并用git上传至GitHub及展示预览效果<br><img src="/2019/07/16/create-react-app创建项目并用git上传至GitHub及展示预览效果/balloon.jpg" alt="balloon"><br><a id="more"></a></p><p>1、在本地中创建一个项目所在的文件夹</p><p>2、npm -g create-react-app</p><p>3、在此文件夹下 create-react-app react-demo (项目名)</p><p>4、cd react-demo</p><p>5、npm start（等待一会浏览器自动开启）</p><p>6、开始噼里啪啦写你需要的代码</p><p>7、（重点）在package.json配置文件中加一句：　“homepage”: “./” （为下面打包做准备，如果不加这句话，那么在预览时开启的页面空白，原因路径不对）</p><p>8、npm run build（打包）</p><p>9、在你的GitHub上新建个仓库，把地址复制下来备用</p><p>10、项目所在文件夹下git init</p><p>11、git add . （点的意思是所有文件，把所有文件添加上去）</p><p>12、git commit -m “xxxxxxxxxx”（提交信息）</p><p>13、git remote add origin <a href="https://github.com/xxx/xxx（刚才你在GitHub上保存的地址）" target="_blank" rel="noopener">https://github.com/xxx/xxx（刚才你在GitHub上保存的地址）</a></p><p>14、git pull origin master（上传之前先拉一下，第一次不拉也行，但是之后提交最好想成这个习惯）</p><p>15、git push -u origin master（把你的代码提到GitHub上）</p><p>16、此时，在GitHub对应的仓库上，就可以看到刚才提交的代码了。</p><p>17、点击“setting”；找到GitHub Pages，source中点击下面按钮切换到master branch，点击save；就可以看到一个链接了，点击链接，发现出现的是你项目中的README.md；</p><p>18、在链接后面加上   /build/#    回车后，即可看到预览效果。 </p><p>19、之后的修改代码后，重新npm run build ，重复11~15步骤即可。</p><p>tips： 如果发现build文件夹没有上传至github上，在.gitignore文件中把忽略build的代码删除掉就可以了。</p>]]></content>
+      
+      
+    </entry>
+    
+    <entry>
       <title>react实现抽奖大转盘</title>
       <link href="/2019/06/22/react%E5%AE%9E%E7%8E%B0%E6%8A%BD%E5%A5%96%E5%A4%A7%E8%BD%AC%E7%9B%98/"/>
       <url>/2019/06/22/react%E5%AE%9E%E7%8E%B0%E6%8A%BD%E5%A5%96%E5%A4%A7%E8%BD%AC%E7%9B%98/</url>
@@ -181,9 +205,9 @@
       
         <tags>
             
-            <tag> 前端 </tag>
-            
             <tag> css </tag>
+            
+            <tag> 前端 </tag>
             
         </tags>
       
