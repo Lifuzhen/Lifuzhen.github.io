@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>lifuzhen</title>
+  <title>玲珑肴</title>
   <icon>https://www.gravatar.com/avatar/a9f20b334b612fb41766f27517bdfacb</icon>
   <subtitle>梦想的起源</subtitle>
   <link href="/atom.xml" rel="self"/>
@@ -10,7 +10,7 @@
   <id>https://Lifuzhen.github.io/</id>
   
   <author>
-    <name>lifuzhen</name>
+    <name>玲珑肴</name>
     <email>1342786307@qq.com</email>
   </author>
   
