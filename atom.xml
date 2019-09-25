@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Lifuzhen.github.io/"/>
-  <updated>2019-09-22T03:55:50.485Z</updated>
+  <updated>2019-09-25T01:23:36.831Z</updated>
   <id>https://Lifuzhen.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>微信扫码登录自定义样式</title>
+    <link href="https://Lifuzhen.github.io/2019/09/24/%E5%BE%AE%E4%BF%A1%E6%89%AB%E7%A0%81%E7%99%BB%E5%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%B7%E5%BC%8F/"/>
+    <id>https://Lifuzhen.github.io/2019/09/24/微信扫码登录自定义样式/</id>
+    <published>2019-09-24T01:31:12.000Z</published>
+    <updated>2019-09-25T01:23:36.831Z</updated>
+    
+    <content type="html"><![CDATA[<p>微信扫码登录现在几乎是每个网站必备的登录方式.<br><a href="https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&amp;t=resource/res_list&amp;verify=1&amp;id=open1419316505&amp;token=&amp;lang=zh_CN" target="_blank" rel="noopener">网站应用微信登录开发指南</a></p><p>官方文档中介绍了两种登录方式：1、url跳转；2、内嵌</p><h1 id="url跳转"><a href="#url跳转" class="headerlink" title="url跳转"></a>url跳转</h1><p>url跳转至一个新页面，效果如下：</p><p><img src="/2019/09/24/微信扫码登录自定义样式/url.jpg" alt=""></p><h1 id="内嵌"><a href="#内嵌" class="headerlink" title="内嵌"></a>内嵌</h1><p>页面内嵌代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;内嵌-微信登陆&lt;/title&gt;</span><br><span class="line">    &lt;script src=&quot;http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div id=&quot;login_container&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var obj = new WxLogin(&#123;</span><br><span class="line">        self_redirect:false,</span><br><span class="line">        id:&quot;login_container&quot;,</span><br><span class="line">        appid: &quot;wxbdc5610cc59c1631&quot;,</span><br><span class="line">        scope: &quot;snsapi_login&quot;,</span><br><span class="line">        redirect_uri: &quot;https%3A%2F%2Fpassport.yhd.com%2Fwechat%2Fcallback.do&quot;,</span><br><span class="line">        state: Math.ceil(Math.random()*1000),</span><br><span class="line">        style: &quot;black&quot;,</span><br><span class="line">        href: &quot;&quot;</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p><p>官方参数说明：<br><img src="/2019/09/24/微信扫码登录自定义样式/canshu.png" alt=""></p><p>内嵌效果如下：</p><p><img src="/2019/09/24/微信扫码登录自定义样式/0.jpg" alt=""></p><h1 id="自定义样式"><a href="#自定义样式" class="headerlink" title="自定义样式"></a>自定义样式</h1><h2 id="href链接写好的css样式（必须是https），http不会响应"><a href="#href链接写好的css样式（必须是https），http不会响应" class="headerlink" title="href链接写好的css样式（必须是https），http不会响应"></a>href链接写好的css样式（必须是https），http不会响应</h2><h3 id="内嵌-1"><a href="#内嵌-1" class="headerlink" title="内嵌"></a>内嵌</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var obj = new WxLogin(&#123;</span><br><span class="line">        self_redirect:false,</span><br><span class="line">        id:&quot;login_container&quot;,</span><br><span class="line">        appid: &quot;wxbdc5610cc59c1631&quot;,</span><br><span class="line">        scope: &quot;snsapi_login&quot;,</span><br><span class="line">        redirect_uri: &quot;https%3A%2F%2Fpassport.yhd.com%2Fwechat%2Fcallback.do&quot;,</span><br><span class="line">        state: Math.ceil(Math.random()*1000),</span><br><span class="line">        style: &quot;black&quot;,</span><br><span class="line">        href: &quot;https://lifuzhen.github.io/create-react-app-antd-less/src/assets/wechatLogin.min.css&quot;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure><p>wechatLogin.min.css:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@charset &quot;utf-8&quot;;.impowerBox .qrcode&#123;width:180px;border:0;margin-top:13px&#125;.impowerBox .title&#123;display:none&#125;.impowerBox .info&#123;width:160px&#125;.status_icon&#123;display:none&#125;.impowerBox .status&#123;text-align:center&#125;.wrp_code&#123;width:206px;background-color:#fff;border:1px solid #e5e5e5;height:206px;margin:0 auto;border-radius:4px&#125;.panelContent .info&#123;display:none&#125;</span><br></pre></td></tr></table></figure></p><h3 id="url跳转的链接（可直接打开）"><a href="#url跳转的链接（可直接打开）" class="headerlink" title="url跳转的链接（可直接打开）"></a>url跳转的链接（可直接打开）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://open.weixin.qq.com/connect/qrconnect?appid=wxbdc5610cc59c1631&amp;redirect_uri=https%3A%2F%2Fpassport.yhd.com%2Fwechat%2Fcallback.do&amp;response_type=code&amp;scope=snsapi_login&amp;href=https://lifuzhen.github.io/create-react-app-antd-less/src/assets/wechatLogin.min.css&amp;state=b3dbfa5773c25b9e942465253b5af6ee#wechat_redirect</span><br></pre></td></tr></table></figure><p>将微信的title和info都隐藏掉了，也改变了二维码的大小。效果如下：</p><p><img src="/2019/09/24/微信扫码登录自定义样式/href0.png" alt=""></p><h2 id="也可以转换成base64"><a href="#也可以转换成base64" class="headerlink" title="也可以转换成base64"></a>也可以转换成base64</h2><h3 id="内嵌-2"><a href="#内嵌-2" class="headerlink" title="内嵌"></a>内嵌</h3><p>转换css：</p><p><img src="/2019/09/24/微信扫码登录自定义样式/base64.jpg" alt=""></p><p>代码：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var obj = new WxLogin(&#123;</span><br><span class="line">        self_redirect:false,</span><br><span class="line">        id:&quot;login_container&quot;,</span><br><span class="line">        appid: &quot;wxbdc5610cc59c1631&quot;,</span><br><span class="line">        scope: &quot;snsapi_login&quot;,</span><br><span class="line">        redirect_uri: &quot;https%3A%2F%2Fpassport.yhd.com%2Fwechat%2Fcallback.do&quot;,</span><br><span class="line">        href:&apos;data:text/css;base64,QGNoYXJzZXQgInV0Zi04IjsuaW1wb3dlckJveCAucXJjb2Rle3dpZHRoOjE4MHB4O2JvcmRlcjowO21hcmdpbi10b3A6MTNweH0uaW1wb3dlckJveCAudGl0bGV7ZGlzcGxheTpub25lfS5pbXBvd2VyQm94IC5pbmZve3dpZHRoOjE2MHB4fS5zdGF0dXNfaWNvbntkaXNwbGF5Om5vbmV9LmltcG93ZXJCb3ggLnN0YXR1c3t0ZXh0LWFsaWduOmNlbnRlcn0ud3JwX2NvZGV7d2lkdGg6MjA2cHg7YmFja2dyb3VuZC1jb2xvcjojZmZmO2JvcmRlcjoxcHggc29saWQgI2U1ZTVlNTtoZWlnaHQ6MjA2cHg7bWFyZ2luOjAgYXV0bztib3JkZXItcmFkaXVzOjRweH0ucGFuZWxDb250ZW50IC5pbmZve2Rpc3BsYXk6bm9uZX0=&apos;,</span><br><span class="line">        state: Math.ceil(Math.random()*1000),</span><br><span class="line">        style: &quot;black&quot;,</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure><h3 id="url跳转的链接（可直接打开）-1"><a href="#url跳转的链接（可直接打开）-1" class="headerlink" title="url跳转的链接（可直接打开）"></a>url跳转的链接（可直接打开）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://open.weixin.qq.com/connect/qrconnect?appid=wxbdc5610cc59c1631&amp;redirect_uri=https%3A%2F%2Fpassport.yhd.com%2Fwechat%2Fcallback.do&amp;response_type=code&amp;scope=snsapi_login&amp;href=data:text/css;base64,QGNoYXJzZXQgInV0Zi04IjsuaW1wb3dlckJveCAucXJjb2Rle3dpZHRoOjE4MHB4O2JvcmRlcjowO21hcmdpbi10b3A6MTNweH0uaW1wb3dlckJveCAudGl0bGV7ZGlzcGxheTpub25lfS5pbXBvd2VyQm94IC5pbmZve3dpZHRoOjE2MHB4fS5zdGF0dXNfaWNvbntkaXNwbGF5Om5vbmV9LmltcG93ZXJCb3ggLnN0YXR1c3t0ZXh0LWFsaWduOmNlbnRlcn0ud3JwX2NvZGV7d2lkdGg6MjA2cHg7YmFja2dyb3VuZC1jb2xvcjojZmZmO2JvcmRlcjoxcHggc29saWQgI2U1ZTVlNTtoZWlnaHQ6MjA2cHg7bWFyZ2luOjAgYXV0bztib3JkZXItcmFkaXVzOjRweH0ucGFuZWxDb250ZW50IC5pbmZve2Rpc3BsYXk6bm9uZX0=&amp;state=b3dbfa5773c25b9e942465253b5af6ee#wechat_redirect</span><br></pre></td></tr></table></figure><p>效果如下：</p><p><img src="/2019/09/24/微信扫码登录自定义样式/href0.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;微信扫码登录现在几乎是每个网站必备的登录方式.&lt;br&gt;&lt;a href=&quot;https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&amp;amp;t=resource/res_list&amp;amp;verify=1&amp;
+      
+    
+    </summary>
+    
+      <category term="前端" scheme="https://Lifuzhen.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="css" scheme="https://Lifuzhen.github.io/tags/css/"/>
+    
+      <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="js" scheme="https://Lifuzhen.github.io/tags/js/"/>
+    
+      <category term="微信" scheme="https://Lifuzhen.github.io/tags/%E5%BE%AE%E4%BF%A1/"/>
+    
+  </entry>
   
   <entry>
     <title>关于this.setState({})中的数据延迟问题</title>
@@ -88,9 +119,9 @@
       <category term="前端" scheme="https://Lifuzhen.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="css" scheme="https://Lifuzhen.github.io/tags/css/"/>
+    
+      <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
@@ -112,9 +143,9 @@
       <category term="前端" scheme="https://Lifuzhen.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="css" scheme="https://Lifuzhen.github.io/tags/css/"/>
+    
+      <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
@@ -137,9 +168,9 @@
       <category term="前端" scheme="https://Lifuzhen.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="css" scheme="https://Lifuzhen.github.io/tags/css/"/>
+    
+      <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
@@ -372,9 +403,9 @@
       <category term="前端" scheme="https://Lifuzhen.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="js" scheme="https://Lifuzhen.github.io/tags/js/"/>
-    
       <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="js" scheme="https://Lifuzhen.github.io/tags/js/"/>
     
   </entry>
   
@@ -426,9 +457,9 @@
       <category term="前端" scheme="https://Lifuzhen.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="css" scheme="https://Lifuzhen.github.io/tags/css/"/>
+    
+      <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
@@ -478,28 +509,6 @@
     
     
       <category term="English" scheme="https://Lifuzhen.github.io/tags/English/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>json对象遍历</title>
-    <link href="https://Lifuzhen.github.io/2018/08/30/json%E5%AF%B9%E8%B1%A1%E9%81%8D%E5%8E%86/"/>
-    <id>https://Lifuzhen.github.io/2018/08/30/json对象遍历/</id>
-    <published>2018-08-30T07:08:36.000Z</published>
-    <updated>2019-05-15T03:59:53.128Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="/2018/08/30/json对象遍历/autumn.jpg" alt="autumn"><br>之前一直都是对json数组进行操作，顺便看一下(<em>^__^</em>)<br><a id="more"></a></p><h1 id="遍历json对象"><a href="#遍历json对象" class="headerlink" title="遍历json对象"></a>遍历json对象</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var jsonObj = &#123;&quot;name&quot;: &quot;jeans&quot;, &quot;password&quot;: &quot;1111&quot;&#125;;</span><br><span class="line">for (var val in jsonObj) &#123;</span><br><span class="line">    alert(val + &quot; &quot; + jsonObj[val]);//输出如:name</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="遍历json数组，元素为json对象"><a href="#遍历json数组，元素为json对象" class="headerlink" title="遍历json数组，元素为json对象"></a>遍历json数组，元素为json对象</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">## 无规律json数组</span><br><span class="line">var jsonArr = [&#123;&quot;name&quot;:&quot;jeans&quot;,&quot;age&quot;:24,&quot;sex&quot;:&quot;女&quot;,city:&quot;江苏&quot;&#125;,</span><br><span class="line">            &#123;&quot;text&quot;:&quot;shelly&quot;,&quot;content&quot;:123654&#125;];</span><br><span class="line"></span><br><span class="line">for (var i = 0, l = jsonArr.length; i &lt; l; i++) &#123;</span><br><span class="line">    for (var key in jsonArr[i]) &#123;</span><br><span class="line">        alert(key + &apos;:&apos; + jsonArr[i][key]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">## 有规律json数组</span><br><span class="line"></span><br><span class="line">var jsonArr =[</span><br><span class="line">&#123;&quot;name&quot;:&quot;jeans&quot;,&quot;age&quot;:24,&quot;sex&quot;:&quot;女&quot;,city:&quot;江苏&quot;&#125;,</span><br><span class="line">&#123;&quot;name&quot;:&quot;shelly&quot;,&quot;age&quot;:21&#125;,&quot;sex&quot;:&quot;女&quot;,&quot;city&quot;:&quot;上海&quot;&#125;</span><br><span class="line">]</span><br><span class="line">(1)、</span><br><span class="line">for (var p in jsonArr) &#123;//遍历json数组时，这么写p为索引，0,1</span><br><span class="line">    alert(jsonArr[p].name + &quot; &quot; + jsonArr[p].age);</span><br><span class="line">&#125;</span><br><span class="line">(2)、</span><br><span class="line">for(var i = 0; i &lt; jsonArr.length; i++)&#123;</span><br><span class="line">   alert(jsonArr[i].name + &quot; &quot; + jsonArr[i].age);</span><br><span class="line">&#125;</span><br><span class="line">(3)、es6 的 map 方法</span><br><span class="line">const html = jsonArr.map((x)=&gt;&#123;</span><br><span class="line">console.lo(x); //x=&#123;&quot;name&quot;:&quot;jeans&quot;,&quot;age&quot;:24,&quot;sex&quot;:&quot;女&quot;,city:&quot;江苏&quot;&#125;</span><br><span class="line">return &lt;p&gt;名字:&#123;x.name&#125;;年龄:&#123;x.age&#125;;性别:&#123;x.sex&#125;;城市:&#123;x.city&#125;&lt;/p&gt;</span><br><span class="line">&#125;)</span><br><span class="line">//map后的结果插入到页面中就可以了</span><br></pre></td></tr></table></figure><h1 id="深度遍历复合Json结构数据"><a href="#深度遍历复合Json结构数据" class="headerlink" title="深度遍历复合Json结构数据"></a>深度遍历复合Json结构数据</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JSON对象里面可以嵌套多层对象(数组或对象)，嵌套层数未知</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 深度遍历</span><br><span class="line"> * 复合的Json结构数据，JSON对象里面可以嵌套多层对象(数组或对象)</span><br><span class="line"> */</span><br><span class="line"> function deepJson(json)&#123;</span><br><span class="line">  // 1. 变量为json对象：将key输出，value进行递归</span><br><span class="line">     if(isType(json, &quot;Object&quot;))&#123;</span><br><span class="line">          for(var key in json)&#123;</span><br><span class="line">           $(&quot;#out&quot;).append(key + &apos; : &apos;);</span><br><span class="line">           if(isType(json[key], &quot;Array&quot;) || isType(json[key], &quot;Object&quot;))&#123;</span><br><span class="line">            $(&quot;#out&quot;).append(&quot;下面为子项内容&lt;br/&gt;&quot;);</span><br><span class="line">           &#125;</span><br><span class="line">           deepTraverse(json[key]);</span><br><span class="line">          &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     // 2. 变量为json数组：逐个元素递归</span><br><span class="line">     else if(isType(json, &quot;Array&quot;))&#123;</span><br><span class="line">          for(var i=0; i&lt;json.length; i++)&#123;</span><br><span class="line">               var jsonObj = json[i];</span><br><span class="line">               deepTraverse(jsonObj);</span><br><span class="line">              // 遍历数组中的元素(为json对象)后输出：分隔线+一个换行符</span><br><span class="line">              if(isType(jsonObj, &quot;Object&quot;))&#123;</span><br><span class="line">                $(&quot;#out&quot;).append(&quot;------------------------&lt;br/&gt;&quot;);</span><br><span class="line">               &#125;</span><br><span class="line">          &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     // 3. 变量为简单数据类型：直接输出（递归函数的终止条件）</span><br><span class="line">     else if(isType(json, &quot;String&quot;) || isType(json, &quot;Number&quot;) ||</span><br><span class="line">      isType(json,&quot;Boolean&quot;) || isType(json,&quot;Null&quot;))&#123;</span><br><span class="line">          $(&quot;#out&quot;).append(json);</span><br><span class="line">          $(&quot;#out&quot;).append(&quot;&lt;br/&gt;&quot;);</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;/2018/08/30/json对象遍历/autumn.jpg&quot; alt=&quot;autumn&quot;&gt;&lt;br&gt;之前一直都是对json数组进行操作，顺便看一下(&lt;em&gt;^__^&lt;/em&gt;)&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="前端" scheme="https://Lifuzhen.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-    
-      <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
