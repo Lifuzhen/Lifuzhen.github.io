@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Lifuzhen.github.io/"/>
-  <updated>2019-09-25T01:23:36.831Z</updated>
+  <updated>2019-09-26T02:01:23.748Z</updated>
   <id>https://Lifuzhen.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>react-canvas-nest</title>
+    <link href="https://Lifuzhen.github.io/2019/09/26/react-canvas-nest/"/>
+    <id>https://Lifuzhen.github.io/2019/09/26/react-canvas-nest/</id>
+    <published>2019-09-25T22:58:12.000Z</published>
+    <updated>2019-09-26T02:01:23.748Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前在人家网站上看到，我都能玩半个小时。<br>今天刚好看到了这个插件：react-canvas-nest,用来写写</p><p><a href="https://lifuzhen.github.io/create-react-app-antd-less/build/#/nest">演示效果</a></p><p>在react环境下使用的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">安装：</span><br><span class="line"></span><br><span class="line">npm install react-canvas-nest</span><br></pre></td></tr></table></figure></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">使用代码：</span><br><span class="line"></span><br><span class="line">import React from &quot;react&quot;;</span><br><span class="line">import ReactCanvasNest from &quot;react-canvas-nest&quot;; //引入</span><br><span class="line"></span><br><span class="line">class Home extends React.Component&#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        return &lt;ReactCanvasNest</span><br><span class="line">             className=&apos;canvasNest&apos;</span><br><span class="line">              config=&#123;&#123;</span><br><span class="line">                    pointColor: &apos;173, 188, 213 &apos;,</span><br><span class="line">                    lineColor: &apos;185, 198,219&apos;,</span><br><span class="line">                    lineWidth: 2,</span><br><span class="line">                    count: 120,</span><br><span class="line">                    pointR: 1.5</span><br><span class="line">                &#125;&#125;</span><br><span class="line">              style=&#123;&#123;zIndex: 1&#125;&#125;</span><br><span class="line">          /&gt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">export default Home;</span><br></pre></td></tr></table></figure><p>效果如下所示：</p><p><img src="/2019/09/26/react-canvas-nest/Animation.gif" alt=""></p><h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><p>config<br><img src="/2019/09/26/react-canvas-nest/config.png" alt="config"></p><p>style<br>Support style attribute, default style as follows:<br><img src="/2019/09/26/react-canvas-nest/style.jpg" alt="style"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;之前在人家网站上看到，我都能玩半个小时。&lt;br&gt;今天刚好看到了这个插件：react-canvas-nest,用来写写&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://lifuzhen.github.io/create-react-app-antd-less/build/#/
+      
+    
+    </summary>
+    
+    
+      <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="react" scheme="https://Lifuzhen.github.io/tags/react/"/>
+    
+  </entry>
   
   <entry>
     <title>微信扫码登录自定义样式</title>
@@ -487,28 +513,6 @@
     
     
       <category term="随便写写" scheme="https://Lifuzhen.github.io/tags/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>英语</title>
-    <link href="https://Lifuzhen.github.io/2018/09/04/%E8%8B%B1%E8%AF%AD/"/>
-    <id>https://Lifuzhen.github.io/2018/09/04/英语/</id>
-    <published>2018-09-04T10:37:12.000Z</published>
-    <updated>2019-05-15T03:59:53.136Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="吐槽一下我的培训班的英语老师"><a href="#吐槽一下我的培训班的英语老师" class="headerlink" title="吐槽一下我的培训班的英语老师"></a>吐槽一下我的培训班的英语老师</h1><p>9月2号我的英语班级开班，去上第一天课。满怀憧憬，提前一天预演了一下我的自我介绍（自我感觉良好，心里美滋滋）。在去上课的地铁上还在纠结到底要不要介绍我什么时候毕业、什么时候工作的要不要辣莫细呢？<br><a id="more"></a><br>教室不是特别大，坐在教室里没一会老师进来了。一直到他开口前面部都没有任何表情（给人一种不苟言笑的感觉），心里默念辣莫高冷。开始让我们自我介绍，让我们分别介绍教育、英文等级、等等。之前根本没有打算介绍教育背景、英文等级，都没有任何准备，打得我一个措手不及。中途还有很多人会日语，老师也用日语跟学生交流（我听不懂，我日语也就只知道五十音图）？？？？介绍完后老师说既然大家都没有太高的等级，就把英语的语速降低点。老师上来真的语速慢了很多（暖暖的很贴心）。</p><p>后来可能是为了调节课堂气氛，讲了一大串英文语速特别快。全程没有听明白说的啥（黑人问好脸）偶尔还会给我们蹦出一大串日语和法语，他是切换的毫无破绽我们也是听得毫无破绽。我都觉得我之前的英文全都白学了。为什么我什么都听不懂，我明明最近一直都在背单词听听力。</p><p>老师的语速快起来真的没边，从没有读过的文章到手就很6666666的语速。</p><p>老师的会的语言真是数不胜数，法语、韩语、日语、英语、四川话、东北话、上海话（其中还包括我很多没有听明白的语言，这些也不是都听出来的，看他朋友圈看到的）他说他之前一起带过英语和日语的培训班（用英语讲日语，佩服的五体投地）</p><p><img src="/2018/09/04/英语/english.jpg" alt="english"></p><p>这是下课后老师在群里给我们发的一段话，当时看到就没往下看了，有点怀疑这是英语吗？然后查字典找单词的意思，勉强翻译出了这句话（心碎了一地）</p><p>打击了我的自信心也激发了我的斗志（加油）</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;吐槽一下我的培训班的英语老师&quot;&gt;&lt;a href=&quot;#吐槽一下我的培训班的英语老师&quot; class=&quot;headerlink&quot; title=&quot;吐槽一下我的培训班的英语老师&quot;&gt;&lt;/a&gt;吐槽一下我的培训班的英语老师&lt;/h1&gt;&lt;p&gt;9月2号我的英语班级开班，去上第一天课。满怀憧憬，提前一天预演了一下我的自我介绍（自我感觉良好，心里美滋滋）。在去上课的地铁上还在纠结到底要不要介绍我什么时候毕业、什么时候工作的要不要辣莫细呢？&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="English" scheme="https://Lifuzhen.github.io/categories/English/"/>
-    
-    
-      <category term="English" scheme="https://Lifuzhen.github.io/tags/English/"/>
     
   </entry>
   
