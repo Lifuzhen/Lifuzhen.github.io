@@ -3,6 +3,23 @@
   
     
     <entry>
+      <title>position为fixed时设置z-index失效</title>
+      <link href="/2019/11/26/position%E4%B8%BAfixed%E6%97%B6%E8%AE%BE%E7%BD%AEz-index%E5%A4%B1%E6%95%88/"/>
+      <url>/2019/11/26/position%E4%B8%BAfixed%E6%97%B6%E8%AE%BE%E7%BD%AEz-index%E5%A4%B1%E6%95%88/</url>
+      <content type="html"><![CDATA[<p>今天在改bug的时候遇到了个z-index的问题，怎么都调试不好，然后就上网百度<br>bug: 一个div元素下两个子元素，其中一个子元素fixed定位，另一个没有办法执行click方法</p><p>原来谷歌浏览器在设置position:fixed;后会触发元素创建一个新的层叠上下文，并且当成一个整体在父层叠上下文中进行比较。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;a&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;b&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p><p>如上面的dom结构，当给b设置了position:fixed;属性后，会触发创建一个新的层叠上下文，它的父层叠上下文变成了a，所以b只能在a的内部进行层叠比较。这也就是大家熟听的“从父原则”。</p><p>所以本来所有元素都在root内比较，改为fixed之后只能在父级元素内比较，而父级元素没有设置z-index，所以无法比较。</p><p>所以解决方案是给父级元素设置z-index，一般设置为0就可以了。</p><p>tips：</p><ol><li>z-index只有在设置了position为relative,absolute,fixed时才会有效。 </li><li>z-index的“从父原则”。当你发现把z-index设的多大都没用时，看看其父元素是否设置了有效的z-index，当然别忘了先看看自身是否设置了position。</li></ol>]]></content>
+      
+      
+        <tags>
+            
+            <tag> css </tag>
+            
+            <tag> 前端 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>2019月度总结-九月</title>
       <link href="/2019/10/05/2019%E6%9C%88%E5%BA%A6%E6%80%BB%E7%BB%93-%E4%B9%9D%E6%9C%88/"/>
       <url>/2019/10/05/2019%E6%9C%88%E5%BA%A6%E6%80%BB%E7%BB%93-%E4%B9%9D%E6%9C%88/</url>
