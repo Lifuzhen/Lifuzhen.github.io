@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Lifuzhen.github.io/"/>
-  <updated>2021-01-18T13:11:24.029Z</updated>
+  <updated>2021-03-16T12:09:12.718Z</updated>
   <id>https://Lifuzhen.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>在React Hooks中使用生命周期方法</title>
+    <link href="https://Lifuzhen.github.io/2021/03/16/%E5%9C%A8React%20Hooks%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%96%B9%E6%B3%95/"/>
+    <id>https://Lifuzhen.github.io/2021/03/16/在React Hooks中使用生命周期方法/</id>
+    <published>2021-03-16T10:48:03.000Z</published>
+    <updated>2021-03-16T12:09:12.718Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文来自于<a href="https://www.sollrei.me/post/frontend/2019-05-28" target="_blank" rel="noopener">Sollrei</a></p><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>因为项目上用到了hooks+ts，在使用定时任务的时候，退出当前组件时，仍然会执行定时任务，但是在hooks中没有componentWillUnMount方法，所以就网上查找资料。</p><h3 id="React新版本的生命周期"><a href="#React新版本的生命周期" class="headerlink" title="React新版本的生命周期"></a>React新版本的生命周期</h3><p><img src="/2021/03/16/在React Hooks中使用生命周期方法/01.jpg" alt=""></p><blockquote><p>react 16.3之后新增了两个生命周期getDerivedStateFromProps和getSnapshotBeforeUpdate，并且原来的componentWillMount，componentWillReceiveProps以及componentWillUpdate将被移除。</p></blockquote><h3 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h3><p>函数组件不用写constructor，用useState初始化state</p><h3 id="getDerivedStateFromProps"><a href="#getDerivedStateFromProps" class="headerlink" title="getDerivedStateFromProps"></a>getDerivedStateFromProps</h3><blockquote><p>这个方法基本用来替代componentWillReceiveProps，它是个静态方法，也就是说不能访问this，也就是说不能改this.state</p></blockquote><p>官方栗子</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ScrollView</span>(<span class="params">&#123;row&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> [isScrollingDown, setIsScrollingDown] = useState(<span class="literal">false</span>);</span><br><span class="line">  <span class="keyword">let</span> [prevRow, setPrevRow] = useState(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (row !== prevRow) &#123;</span><br><span class="line">    <span class="comment">// 上次渲染后row发生变化  更新isScrollingDown.</span></span><br><span class="line">    setIsScrollingDown(prevRow !== <span class="literal">null</span> &amp;&amp; row &gt; prevRow);</span><br><span class="line">    setPrevRow(row);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="string">`Scrolling down: <span class="subst">$&#123;isScrollingDown&#125;</span>`</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="shouldComponentUpdate"><a href="#shouldComponentUpdate" class="headerlink" title="shouldComponentUpdate"></a>shouldComponentUpdate</h3><p>使用React.memo，类似PureComponent，但它只对比props的变化</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Demo = React.memo(<span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>对子组件可以使用useMemo</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span>(<span class="params">&#123; a, b &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 只在a变化时re-render</span></span><br><span class="line">  <span class="keyword">const</span> child1 = useMemo(<span class="function"><span class="params">()</span> =&gt;</span> &lt;Child1 a=&#123;a&#125; /&gt;, [a]);</span><br><span class="line">  <span class="comment">// 只在b变化时re-render</span></span><br><span class="line">  <span class="keyword">const</span> child2 = useMemo(<span class="function"><span class="params">()</span> =&gt;</span> &lt;Child2 b=&#123;b&#125; /&gt;, [b]);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;&gt;</span><br><span class="line">      &#123;child1&#125;</span><br><span class="line">      &#123;child2&#125;</span><br><span class="line">    &lt;<span class="regexp">/&gt;</span></span><br><span class="line"><span class="regexp">  )</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure><h3 id="render"><a href="#render" class="headerlink" title="render"></a>render</h3><p>那就是函数它自个儿了……<br>下面几个可以使用useEffect(fn, […watchStates])实现的</p><h3 id="componentDidMount"><a href="#componentDidMount" class="headerlink" title="componentDidMount"></a>componentDidMount</h3><p>第二个参数传空数组</p><blockquote><p>这么写在useEffect里使用一些state的时候会报错”missing dependency”，暂时用了eslint-disable-line</p></blockquote><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Demo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [title, setTitle] = useState(<span class="string">'hello'</span>);</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">document</span>.title = title;</span><br><span class="line">    <span class="comment">// do ...</span></span><br><span class="line">  &#125;, []); <span class="comment">// eslint-disable-line</span></span><br><span class="line"></span><br><span class="line">   <span class="comment">// 点击文字是 hello world world .... 但是页面title是hello</span></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div onClick=&#123;() =&gt; setTitle(title + <span class="string">' world'</span>)&#125;&gt;&#123;title&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure><h3 id="componentDidUpdate"><a href="#componentDidUpdate" class="headerlink" title="componentDidUpdate"></a>componentDidUpdate</h3><p>只传一个参数，每次render就都会调用这个函数，和componentDidUpdate不同的是第一次render也会执行它</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Demo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [title, setTitle] = useState(<span class="string">'hello'</span>);</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">document</span>.title = title;</span><br><span class="line">    <span class="comment">// do ...</span></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div onClick=&#123;() =&gt; setTitle(title + <span class="string">' world'</span>)&#125;&gt;&#123;title&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure><p>如果不希望在第一次（初始）render时候调用，可以：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Demo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [title, setTitle] = useState(<span class="string">'hello'</span>);</span><br><span class="line">  <span class="keyword">const</span> first = useRef(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">  useLayoutEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (first.current) &#123;</span><br><span class="line">      first.current = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">document</span>.title = title;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"componentDidUpdateFunction"</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div onClick=&#123;() =&gt; setTitle(title + <span class="string">' world'</span>)&#125;&gt;&#123;title&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure><h3 id="componentWillUnmount"><a href="#componentWillUnmount" class="headerlink" title="componentWillUnmount"></a>componentWillUnmount</h3><p>在useEffect的第一个函数参数中返回一个函数，这个函数就会在unmount时候被调用</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Demo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [title, setTitle] = useState(<span class="string">'hello'</span>);</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'componentWillUnmount'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div onClick=&#123;() =&gt; setTitle(title + <span class="string">' world'</span>)&#125;&gt;&#123;title&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure><p>最后最后componentDidCatch和getDerivedStateFromError暂时还不能用Hook来实现，暂时。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;本文来自于&lt;a href=&quot;https://www.sollrei.me/post/frontend/2019-05-28&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Sollrei&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; c
+      
+    
+    </summary>
+    
+    
+      <category term="react" scheme="https://Lifuzhen.github.io/tags/react/"/>
+    
+      <category term="hooks" scheme="https://Lifuzhen.github.io/tags/hooks/"/>
+    
+  </entry>
   
   <entry>
     <title>微信公众号h5跳转小程序</title>
@@ -155,9 +181,9 @@
       <category term="前端" scheme="https://Lifuzhen.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="css" scheme="https://Lifuzhen.github.io/tags/css/"/>
+    
+      <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
@@ -183,9 +209,9 @@
       <category term="前端" scheme="https://Lifuzhen.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="css" scheme="https://Lifuzhen.github.io/tags/css/"/>
+    
+      <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
       <category term="背景图" scheme="https://Lifuzhen.github.io/tags/%E8%83%8C%E6%99%AF%E5%9B%BE/"/>
     
@@ -236,9 +262,9 @@
     </summary>
     
     
-      <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="css" scheme="https://Lifuzhen.github.io/tags/css/"/>
+    
+      <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
@@ -293,9 +319,9 @@
       <category term="前端" scheme="https://Lifuzhen.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="js" scheme="https://Lifuzhen.github.io/tags/js/"/>
-    
       <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="js" scheme="https://Lifuzhen.github.io/tags/js/"/>
     
   </entry>
   
@@ -346,11 +372,11 @@
       <category term="前端" scheme="https://Lifuzhen.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="js" scheme="https://Lifuzhen.github.io/tags/js/"/>
+      <category term="css" scheme="https://Lifuzhen.github.io/tags/css/"/>
     
       <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="css" scheme="https://Lifuzhen.github.io/tags/css/"/>
+      <category term="js" scheme="https://Lifuzhen.github.io/tags/js/"/>
     
       <category term="微信" scheme="https://Lifuzhen.github.io/tags/%E5%BE%AE%E4%BF%A1/"/>
     
@@ -428,9 +454,9 @@
       <category term="前端" scheme="https://Lifuzhen.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="css" scheme="https://Lifuzhen.github.io/tags/css/"/>
+    
+      <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
@@ -452,9 +478,9 @@
       <category term="前端" scheme="https://Lifuzhen.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="css" scheme="https://Lifuzhen.github.io/tags/css/"/>
+    
+      <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
@@ -477,9 +503,9 @@
       <category term="前端" scheme="https://Lifuzhen.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="css" scheme="https://Lifuzhen.github.io/tags/css/"/>
+    
+      <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
@@ -504,26 +530,6 @@
     
     
       <category term="2019月度总结" scheme="https://Lifuzhen.github.io/tags/2019%E6%9C%88%E5%BA%A6%E6%80%BB%E7%BB%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Git常用命令速查表</title>
-    <link href="https://Lifuzhen.github.io/2019/07/22/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5%E8%A1%A8/"/>
-    <id>https://Lifuzhen.github.io/2019/07/22/Git常用命令速查表/</id>
-    <published>2019-07-22T10:31:21.000Z</published>
-    <updated>2019-07-22T11:29:14.768Z</updated>
-    
-    <content type="html"><![CDATA[<p>Git常用命令速查表</p><a id="more"></a><h5 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git clone &lt;url&gt;                  #克隆远程版本库</span><br><span class="line">$ git init                         #初始化本地版本库</span><br></pre></td></tr></table></figure><h5 id="修改和提交"><a href="#修改和提交" class="headerlink" title="修改和提交"></a>修改和提交</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ git status                       #查看状态</span><br><span class="line">$ git diff                         #查看变更内容</span><br><span class="line">$ git add .                        #跟踪所有改动过的文件</span><br><span class="line">$ git add &lt;file&gt;                   #跟踪指定的文件</span><br><span class="line">$ git mv &lt;old&gt;&lt;new&gt;                #文件改名</span><br><span class="line">$ git rm&lt;file&gt;                     #删除文件</span><br><span class="line">$ git rm --cached&lt;file&gt;            #停止跟踪文件但不删除</span><br><span class="line">$ git commit -m &quot;commit messages&quot;  #提交所有更新过的文件</span><br><span class="line">$ git commit --amend               #修改最后一次改动</span><br></pre></td></tr></table></figure><h5 id="查看提交历史"><a href="#查看提交历史" class="headerlink" title="查看提交历史"></a>查看提交历史</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git log                    #查看提交历史</span><br><span class="line">$ git log -p &lt;file&gt;          #查看指定文件的提交历史</span><br><span class="line">$ git blame &lt;file&gt;           #以列表方式查看指定文件的提交历史</span><br></pre></td></tr></table></figure><h5 id="撤销"><a href="#撤销" class="headerlink" title="撤销"></a>撤销</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git reset --hard HEAD      #撤销工作目录中所有未提交文件的修改内容</span><br><span class="line">$ git checkout HEAD &lt;file&gt;   #撤销指定的未提交文件的修改内容</span><br><span class="line">$ git revert &lt;commit&gt;        #撤销指定的提交</span><br><span class="line">$ git log --before=&quot;1 days&quot;  #退回到之前1天的版本</span><br></pre></td></tr></table></figure><h5 id="分支与标签"><a href="#分支与标签" class="headerlink" title="分支与标签"></a>分支与标签</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git branch                   #显示所有本地分支</span><br><span class="line">$ git checkout &lt;branch/tag&gt;    #切换到指定分支和标签</span><br><span class="line">$ git branch &lt;new-branch&gt;      #创建新分支</span><br><span class="line">$ git branch -d &lt;branch&gt;       #删除本地分支</span><br><span class="line">$ git tag                      #列出所有本地标签</span><br><span class="line">$ git tag &lt;tagname&gt;            #基于最新提交创建标签</span><br><span class="line">$ git tag -d &lt;tagname&gt;         #删除标签</span><br></pre></td></tr></table></figure><h5 id="合并与衍合"><a href="#合并与衍合" class="headerlink" title="合并与衍合"></a>合并与衍合</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git merge &lt;branch&gt;        #合并指定分支到当前分支</span><br><span class="line">$ git rebase &lt;branch&gt;       #衍合指定分支到当前分支</span><br></pre></td></tr></table></figure><h5 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作"></a>远程操作</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git remote -v                   #查看远程版本库信息</span><br><span class="line">$ git remote show &lt;remote&gt;        #查看指定远程版本库信息</span><br><span class="line">$ git remote add &lt;remote&gt; &lt;url&gt;   #添加远程版本库</span><br><span class="line">$ git fetch &lt;remote&gt;              #从远程库获取代码</span><br><span class="line">$ git pull &lt;remote&gt; &lt;branch&gt;      #下载代码及快速合并</span><br><span class="line">$ git push &lt;remote&gt; &lt;branch&gt;      #上传代码及快速合并</span><br><span class="line">$ git push &lt;remote&gt; :&lt;branch/tag-name&gt;  #删除远程分支或标签</span><br><span class="line">$ git push --tags                       #上传所有标签</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Git常用命令速查表&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="git" scheme="https://Lifuzhen.github.io/tags/git/"/>
     
   </entry>
   

@@ -3,6 +3,23 @@
   
     
     <entry>
+      <title>在React Hooks中使用生命周期方法</title>
+      <link href="/2021/03/16/%E5%9C%A8React%20Hooks%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%96%B9%E6%B3%95/"/>
+      <url>/2021/03/16/%E5%9C%A8React%20Hooks%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%96%B9%E6%B3%95/</url>
+      <content type="html"><![CDATA[<p>本文来自于<a href="https://www.sollrei.me/post/frontend/2019-05-28" target="_blank" rel="noopener">Sollrei</a></p><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>因为项目上用到了hooks+ts，在使用定时任务的时候，退出当前组件时，仍然会执行定时任务，但是在hooks中没有componentWillUnMount方法，所以就网上查找资料。</p><h3 id="React新版本的生命周期"><a href="#React新版本的生命周期" class="headerlink" title="React新版本的生命周期"></a>React新版本的生命周期</h3><p><img src="/2021/03/16/在React Hooks中使用生命周期方法/01.jpg" alt=""></p><blockquote><p>react 16.3之后新增了两个生命周期getDerivedStateFromProps和getSnapshotBeforeUpdate，并且原来的componentWillMount，componentWillReceiveProps以及componentWillUpdate将被移除。</p></blockquote><h3 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h3><p>函数组件不用写constructor，用useState初始化state</p><h3 id="getDerivedStateFromProps"><a href="#getDerivedStateFromProps" class="headerlink" title="getDerivedStateFromProps"></a>getDerivedStateFromProps</h3><blockquote><p>这个方法基本用来替代componentWillReceiveProps，它是个静态方法，也就是说不能访问this，也就是说不能改this.state</p></blockquote><p>官方栗子</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ScrollView</span>(<span class="params">&#123;row&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> [isScrollingDown, setIsScrollingDown] = useState(<span class="literal">false</span>);</span><br><span class="line">  <span class="keyword">let</span> [prevRow, setPrevRow] = useState(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (row !== prevRow) &#123;</span><br><span class="line">    <span class="comment">// 上次渲染后row发生变化  更新isScrollingDown.</span></span><br><span class="line">    setIsScrollingDown(prevRow !== <span class="literal">null</span> &amp;&amp; row &gt; prevRow);</span><br><span class="line">    setPrevRow(row);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="string">`Scrolling down: <span class="subst">$&#123;isScrollingDown&#125;</span>`</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="shouldComponentUpdate"><a href="#shouldComponentUpdate" class="headerlink" title="shouldComponentUpdate"></a>shouldComponentUpdate</h3><p>使用React.memo，类似PureComponent，但它只对比props的变化</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Demo = React.memo(<span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>对子组件可以使用useMemo</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span>(<span class="params">&#123; a, b &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 只在a变化时re-render</span></span><br><span class="line">  <span class="keyword">const</span> child1 = useMemo(<span class="function"><span class="params">()</span> =&gt;</span> &lt;Child1 a=&#123;a&#125; /&gt;, [a]);</span><br><span class="line">  <span class="comment">// 只在b变化时re-render</span></span><br><span class="line">  <span class="keyword">const</span> child2 = useMemo(<span class="function"><span class="params">()</span> =&gt;</span> &lt;Child2 b=&#123;b&#125; /&gt;, [b]);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;&gt;</span><br><span class="line">      &#123;child1&#125;</span><br><span class="line">      &#123;child2&#125;</span><br><span class="line">    &lt;<span class="regexp">/&gt;</span></span><br><span class="line"><span class="regexp">  )</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure><h3 id="render"><a href="#render" class="headerlink" title="render"></a>render</h3><p>那就是函数它自个儿了……<br>下面几个可以使用useEffect(fn, […watchStates])实现的</p><h3 id="componentDidMount"><a href="#componentDidMount" class="headerlink" title="componentDidMount"></a>componentDidMount</h3><p>第二个参数传空数组</p><blockquote><p>这么写在useEffect里使用一些state的时候会报错”missing dependency”，暂时用了eslint-disable-line</p></blockquote><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Demo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [title, setTitle] = useState(<span class="string">'hello'</span>);</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">document</span>.title = title;</span><br><span class="line">    <span class="comment">// do ...</span></span><br><span class="line">  &#125;, []); <span class="comment">// eslint-disable-line</span></span><br><span class="line"></span><br><span class="line">   <span class="comment">// 点击文字是 hello world world .... 但是页面title是hello</span></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div onClick=&#123;() =&gt; setTitle(title + <span class="string">' world'</span>)&#125;&gt;&#123;title&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure><h3 id="componentDidUpdate"><a href="#componentDidUpdate" class="headerlink" title="componentDidUpdate"></a>componentDidUpdate</h3><p>只传一个参数，每次render就都会调用这个函数，和componentDidUpdate不同的是第一次render也会执行它</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Demo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [title, setTitle] = useState(<span class="string">'hello'</span>);</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">document</span>.title = title;</span><br><span class="line">    <span class="comment">// do ...</span></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div onClick=&#123;() =&gt; setTitle(title + <span class="string">' world'</span>)&#125;&gt;&#123;title&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure><p>如果不希望在第一次（初始）render时候调用，可以：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Demo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [title, setTitle] = useState(<span class="string">'hello'</span>);</span><br><span class="line">  <span class="keyword">const</span> first = useRef(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">  useLayoutEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (first.current) &#123;</span><br><span class="line">      first.current = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">document</span>.title = title;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"componentDidUpdateFunction"</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div onClick=&#123;() =&gt; setTitle(title + <span class="string">' world'</span>)&#125;&gt;&#123;title&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure><h3 id="componentWillUnmount"><a href="#componentWillUnmount" class="headerlink" title="componentWillUnmount"></a>componentWillUnmount</h3><p>在useEffect的第一个函数参数中返回一个函数，这个函数就会在unmount时候被调用</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Demo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [title, setTitle] = useState(<span class="string">'hello'</span>);</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'componentWillUnmount'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div onClick=&#123;() =&gt; setTitle(title + <span class="string">' world'</span>)&#125;&gt;&#123;title&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure><p>最后最后componentDidCatch和getDerivedStateFromError暂时还不能用Hook来实现，暂时。</p>]]></content>
+      
+      
+        <tags>
+            
+            <tag> react </tag>
+            
+            <tag> hooks </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>微信公众号h5跳转小程序</title>
       <link href="/2021/01/18/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7h5%E8%B7%B3%E8%BD%AC%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
       <url>/2021/01/18/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7h5%E8%B7%B3%E8%BD%AC%E5%B0%8F%E7%A8%8B%E5%BA%8F/</url>
@@ -86,9 +103,9 @@
       
         <tags>
             
-            <tag> 前端 </tag>
-            
             <tag> css </tag>
+            
+            <tag> 前端 </tag>
             
         </tags>
       
@@ -109,9 +126,9 @@
       
         <tags>
             
-            <tag> 前端 </tag>
-            
             <tag> css </tag>
+            
+            <tag> 前端 </tag>
             
             <tag> 背景图 </tag>
             
@@ -145,9 +162,9 @@
       
         <tags>
             
-            <tag> 前端 </tag>
-            
             <tag> css </tag>
+            
+            <tag> 前端 </tag>
             
         </tags>
       
@@ -189,9 +206,9 @@
       
         <tags>
             
-            <tag> js </tag>
-            
             <tag> 前端 </tag>
+            
+            <tag> js </tag>
             
         </tags>
       
@@ -229,11 +246,11 @@
       
         <tags>
             
-            <tag> js </tag>
+            <tag> css </tag>
             
             <tag> 前端 </tag>
             
-            <tag> css </tag>
+            <tag> js </tag>
             
             <tag> 微信 </tag>
             
@@ -292,9 +309,9 @@
       
         <tags>
             
-            <tag> 前端 </tag>
-            
             <tag> css </tag>
+            
+            <tag> 前端 </tag>
             
         </tags>
       
@@ -315,9 +332,9 @@
       
         <tags>
             
-            <tag> 前端 </tag>
-            
             <tag> css </tag>
+            
+            <tag> 前端 </tag>
             
         </tags>
       
@@ -338,9 +355,9 @@
       
         <tags>
             
-            <tag> 前端 </tag>
-            
             <tag> css </tag>
+            
+            <tag> 前端 </tag>
             
         </tags>
       
@@ -526,9 +543,9 @@
       
         <tags>
             
-            <tag> js </tag>
-            
             <tag> 前端 </tag>
+            
+            <tag> js </tag>
             
         </tags>
       
@@ -570,9 +587,9 @@
       
         <tags>
             
-            <tag> 前端 </tag>
-            
             <tag> css </tag>
+            
+            <tag> 前端 </tag>
             
         </tags>
       
