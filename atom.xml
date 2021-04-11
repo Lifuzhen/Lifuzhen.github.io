@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Lifuzhen.github.io/"/>
-  <updated>2021-03-16T12:09:12.718Z</updated>
+  <updated>2021-04-11T16:14:27.606Z</updated>
   <id>https://Lifuzhen.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>git学习指南</title>
+    <link href="https://Lifuzhen.github.io/2021/04/12/git%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97/"/>
+    <id>https://Lifuzhen.github.io/2021/04/12/git学习指南/</id>
+    <published>2021-04-11T16:10:30.000Z</published>
+    <updated>2021-04-11T16:14:27.606Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>那天心血来潮去上图看书了,拿了一本《git学习指南》，还挺厚的一本书，我就走马观花似的看了一遍，记录一下我的摘抄。</p><h3 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h3><p>–format、–oneline 格式化输出<br>–stat、–shortstat 统计信息修改<br>–grph  日志选项<br>–interactive  代码段选取</p><p>git diff 文件名   //查看被修改的行<br>git rm 文件名   //删除文件<br>git log       //显示历史<br>git clone –bare ***.git    //创建裸版本库</p><p>git log -n 3  //only the last three commits<br>git log –online //only one line per commit<br>git log –stat //only show statistics<br>git log –graph –online  //各提交之间的关系<br>git staus 中的文件可以使用   git reset HEAD(重置为当前的HEAD版本)  ***文件  移出暂存区 </p><p>git status –short<br>git stash<br>git stash pop<br>git stash list<br>git stash pop <strong>文件<br>git log –summary -m90% | grep -e “^rename” 百分比显示源文件和目标文件的相似度<br>git log –follow </strong>文件 //连续读取文件被重命名之后的历史记录<br>git blame -M -C -C -C <strong>文件 //确定文件来源<br>git branch //查看分支<br>git checkout -b </strong>分支   //创建并切换到新分支<br>git branch -d <strong>分支  //删除分支<br>git branch </strong>分支  **分支散列值    // 恢复某个分支<br>git reflog  // 列取散列值<br>git reset merge  //取消合并<br>git remote –verbose   //显示用于获取或推送提交的路径<br>git branch -r //跟踪分支<br>git pull –rebase</p><p>git tag  //创建标签<br>git show -ref –dereference –tags  //打印标签的散列值<br>git log –oneline –decorate  //将标签添加到日志输出中<br>git log -l  //显示所有标签<br>git log –walk-reflogs mybranch  //显示一个分支的本地历史记录<br>git diff<br>git diff –word-diff    //按单词显示所做的修改<br>git diff –word-diff=color    //使用不同的颜色显示文件中的不同<br>git config –global alias.ci commit   //commit的别名为ci<br>git config –global alias.st status  //设置status的别名为st<br>git rebase 变基</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;那天心血来潮去上图看书了,拿了一本《git学习指南》，还挺厚的一本书，我就走马观花似的看了一遍，记录一下我的摘抄。&lt;/p&gt;
+&lt;h3 id=&quot;
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>在React Hooks中使用生命周期方法</title>
@@ -506,30 +528,6 @@
       <category term="css" scheme="https://Lifuzhen.github.io/tags/css/"/>
     
       <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2019月度总结 七月</title>
-    <link href="https://Lifuzhen.github.io/2019/08/06/2019%E6%9C%88%E5%BA%A6%E6%80%BB%E7%BB%93-%E4%B8%83%E6%9C%88/"/>
-    <id>https://Lifuzhen.github.io/2019/08/06/2019月度总结-七月/</id>
-    <published>2019-08-06T10:26:34.000Z</published>
-    <updated>2019-08-06T10:28:34.123Z</updated>
-    
-    <content type="html"><![CDATA[<p>2019年已经过去一半了，我才开始写月度总结。</p><p>有句话说“种一棵树最好的时间是十年前，其次是现在”，我们也可以改成“改变自己最好的时间是十年前，其次是现在”。那就从现在开始吧！</p><p><img src="/2019/08/06/2019月度总结-七月/mood.jpg" alt="mood"></p><a id="more"></a><p>本以为我第一次的月度总结会准时一点，在八月一号就应该完成的，没想到还是拖了几天。</p><h1 id="读书"><a href="#读书" class="headerlink" title="读书"></a>读书</h1><p>七月买了好几本书，没有任何技术书籍，我觉得我之前买的技术书挺多的了，都没怎么看呢，等我看完那些在入手吧。买了一些整理情绪的一些书，因为我总觉得我的情绪控制的不好，总是动不动的就心情不好，一个人生闷气，别人还不知道为什么（感觉像是有点小孩子脾气）。所以就多入手了一些整理情绪的书。<br>《JavaScript DOM 编程艺术》这本书是我很早以前买的，但是一直没有看，所以从七月开始给自己定计划看书。七月中上旬看完了这本书，主要介绍了JavaScript和DOM的一些基础知识和使用方法。现在回过头去看才发现这本书很简单，入门级的。<br>《学会提问》就是我七月下旬刚刚入手的书，七月都过完了，这本书我才看了一半，还没有看完。这是一本批判性思维书籍，豆瓣评分8.3。这本书很薄，但是阅读起来很费劲┭┮﹏┭┮</p><blockquote><ul><li>批判性思维系统：找出论题、结论——找出理由——弄清楚词义——找出假设——判断理由是否真实——判断理由是否支持结论——判断论据（包括假设）效力——得出合理结论（以解决问题为导向，找出多种解决办法）。 </li><li>批判性思维的目的是：判别结论的可接受程度及价值大小（相当于数学中的期望=正确概率*价值）。 首先，要找出结论和理由。结论一般在文章标题、开头或结尾，前面一般有指示词，如“因此”、“证明了”、“告诉我们”…</li></ul></blockquote><h1 id="美食"><a href="#美食" class="headerlink" title="美食"></a>美食</h1><p>爱吃也爱尝试，从六月份开始，我每周的周末在公众号更新一篇我做的美食（其实就是家常菜）。分享做法步骤等。<br>《鱼香肉丝》、《葱油拌面》、《猪肉炖粉条》、《菜饭~没有骨头汤》。想要知道具体详细内容的可以关注我的公众号。</p><h1 id="生日"><a href="#生日" class="headerlink" title="生日"></a>生日</h1><p>7月13号也就是农历六月十一是我的生日，那天买了好多好吃的，我、男朋友、颖、飘我们一起吃了顿饭，看着他们三个在厨房忙活，我坐享其成啊~罪过</p><p><img src="/2019/08/06/2019月度总结-七月/food.jpg" alt=""></p><p>好喜欢烤鸭的皮啊~超级好吃<br>后来还给我单独买了一个蛋糕，因为没有提前预定，所以跑了几家店都没有蛋糕了。</p><p>八月继续努力加油吧💪</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;2019年已经过去一半了，我才开始写月度总结。&lt;/p&gt;
-&lt;p&gt;有句话说“种一棵树最好的时间是十年前，其次是现在”，我们也可以改成“改变自己最好的时间是十年前，其次是现在”。那就从现在开始吧！&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/2019/08/06/2019月度总结-七月/mood.jpg&quot; alt=&quot;mood&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2019月度总结" scheme="https://Lifuzhen.github.io/categories/2019%E6%9C%88%E5%BA%A6%E6%80%BB%E7%BB%93/"/>
-    
-    
-      <category term="2019月度总结" scheme="https://Lifuzhen.github.io/tags/2019%E6%9C%88%E5%BA%A6%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   

@@ -3,6 +3,15 @@
   
     
     <entry>
+      <title>git学习指南</title>
+      <link href="/2021/04/12/git%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97/"/>
+      <url>/2021/04/12/git%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97/</url>
+      <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>那天心血来潮去上图看书了,拿了一本《git学习指南》，还挺厚的一本书，我就走马观花似的看了一遍，记录一下我的摘抄。</p><h3 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h3><p>–format、–oneline 格式化输出<br>–stat、–shortstat 统计信息修改<br>–grph  日志选项<br>–interactive  代码段选取</p><p>git diff 文件名   //查看被修改的行<br>git rm 文件名   //删除文件<br>git log       //显示历史<br>git clone –bare ***.git    //创建裸版本库</p><p>git log -n 3  //only the last three commits<br>git log –online //only one line per commit<br>git log –stat //only show statistics<br>git log –graph –online  //各提交之间的关系<br>git staus 中的文件可以使用   git reset HEAD(重置为当前的HEAD版本)  ***文件  移出暂存区 </p><p>git status –short<br>git stash<br>git stash pop<br>git stash list<br>git stash pop <strong>文件<br>git log –summary -m90% | grep -e “^rename” 百分比显示源文件和目标文件的相似度<br>git log –follow </strong>文件 //连续读取文件被重命名之后的历史记录<br>git blame -M -C -C -C <strong>文件 //确定文件来源<br>git branch //查看分支<br>git checkout -b </strong>分支   //创建并切换到新分支<br>git branch -d <strong>分支  //删除分支<br>git branch </strong>分支  **分支散列值    // 恢复某个分支<br>git reflog  // 列取散列值<br>git reset merge  //取消合并<br>git remote –verbose   //显示用于获取或推送提交的路径<br>git branch -r //跟踪分支<br>git pull –rebase</p><p>git tag  //创建标签<br>git show -ref –dereference –tags  //打印标签的散列值<br>git log –oneline –decorate  //将标签添加到日志输出中<br>git log -l  //显示所有标签<br>git log –walk-reflogs mybranch  //显示一个分支的本地历史记录<br>git diff<br>git diff –word-diff    //按单词显示所做的修改<br>git diff –word-diff=color    //使用不同的颜色显示文件中的不同<br>git config –global alias.ci commit   //commit的别名为ci<br>git config –global alias.st status  //设置status的别名为st<br>git rebase 变基</p>]]></content>
+      
+      
+    </entry>
+    
+    <entry>
       <title>在React Hooks中使用生命周期方法</title>
       <link href="/2021/03/16/%E5%9C%A8React%20Hooks%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%96%B9%E6%B3%95/"/>
       <url>/2021/03/16/%E5%9C%A8React%20Hooks%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%96%B9%E6%B3%95/</url>
