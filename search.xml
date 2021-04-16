@@ -3,6 +3,27 @@
   
     
     <entry>
+      <title>alternate of undefined</title>
+      <link href="/2021/04/16/alternate%20of%20undefined/"/>
+      <url>/2021/04/16/alternate%20of%20undefined/</url>
+      <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>前一天还可以好好运行的项目,第二天打开就报错了.<br>没有什么改动,真的是感觉代码有毒~<br>既然碰到了这个坑,那就先跳再说</p><h1 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h1><p>项目使用的react版本为16.10.0<br>但是2021-03-22 react官方更新了17.0.2的版本，导致我的项目报了alternate of undefined，就很奇怪的问题，我就添加debugger一步一步的找问题<br><img src="/2021/04/16/alternate of undefined/bug.png" alt=""></p><p>左边是react16.8.6下运行的显示的有_reactInternalFiber这个属性，但是右边的就没有这个属性，react16的大版本都是用的Fiber，没有找到这个属性，所以后续就报错了<br><img src="/2021/04/16/alternate of undefined/01.png" alt=""><br><img src="/2021/04/16/alternate of undefined/02.jpg" alt=""></p><h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>网上去找这个问题的解决方案,很多人说是版本的问题.<br>然后就更新版本，把react、react-dom和react-art 都统一更新到17.0.2的版本，这个问题就解决了。<br>看网上说最好是保证这三个使用的插件大版本是同一个</p><h1 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h1><p>（PS：为什么react更新版本导致了这个项目的问题呢，没有检查到项目中是否有用到云版本~    待解决！！！）</p>]]></content>
+      
+      <categories>
+          
+          <category> react </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> react </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>git学习指南</title>
       <link href="/2021/04/12/git%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97/"/>
       <url>/2021/04/12/git%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97/</url>
@@ -112,9 +133,9 @@
       
         <tags>
             
-            <tag> css </tag>
-            
             <tag> 前端 </tag>
+            
+            <tag> css </tag>
             
         </tags>
       
@@ -135,9 +156,9 @@
       
         <tags>
             
-            <tag> css </tag>
-            
             <tag> 前端 </tag>
+            
+            <tag> css </tag>
             
             <tag> 背景图 </tag>
             
@@ -171,9 +192,9 @@
       
         <tags>
             
-            <tag> css </tag>
-            
             <tag> 前端 </tag>
+            
+            <tag> css </tag>
             
         </tags>
       
@@ -215,9 +236,9 @@
       
         <tags>
             
-            <tag> 前端 </tag>
-            
             <tag> js </tag>
+            
+            <tag> 前端 </tag>
             
         </tags>
       
@@ -255,11 +276,11 @@
       
         <tags>
             
-            <tag> css </tag>
+            <tag> js </tag>
             
             <tag> 前端 </tag>
             
-            <tag> js </tag>
+            <tag> css </tag>
             
             <tag> 微信 </tag>
             
@@ -318,9 +339,9 @@
       
         <tags>
             
-            <tag> css </tag>
-            
             <tag> 前端 </tag>
+            
+            <tag> css </tag>
             
         </tags>
       
@@ -341,9 +362,9 @@
       
         <tags>
             
-            <tag> css </tag>
-            
             <tag> 前端 </tag>
+            
+            <tag> css </tag>
             
         </tags>
       
@@ -364,9 +385,9 @@
       
         <tags>
             
-            <tag> css </tag>
-            
             <tag> 前端 </tag>
+            
+            <tag> css </tag>
             
         </tags>
       
@@ -552,9 +573,9 @@
       
         <tags>
             
-            <tag> 前端 </tag>
-            
             <tag> js </tag>
+            
+            <tag> 前端 </tag>
             
         </tags>
       
@@ -596,9 +617,9 @@
       
         <tags>
             
-            <tag> css </tag>
-            
             <tag> 前端 </tag>
+            
+            <tag> css </tag>
             
         </tags>
       
