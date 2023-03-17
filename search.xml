@@ -3,6 +3,15 @@
   
     
     <entry>
+      <title>setFieldsValue的key是个变量</title>
+      <link href="/2023/03/16/setFieldsValue%E7%9A%84key%E6%98%AF%E4%B8%AA%E5%8F%98%E9%87%8F/"/>
+      <url>/2023/03/16/setFieldsValue%E7%9A%84key%E6%98%AF%E4%B8%AA%E5%8F%98%E9%87%8F/</url>
+      <content type="html"><![CDATA[<p>使用antD的form表单开发，给formItem中的元素设置值，或者是提交后把值置为空。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setFieldsValue设置一组输入控件的值，如果设置的key是个变量时要用【】包裹</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+    </entry>
+    
+    <entry>
       <title>deepClone深拷贝</title>
       <link href="/2023/03/15/deepClone%E6%B7%B1%E6%8B%B7%E8%B4%9D/"/>
       <url>/2023/03/15/deepClone%E6%B7%B1%E6%8B%B7%E8%B4%9D/</url>
@@ -15,8 +24,20 @@
       <title>git config中name和email问题</title>
       <link href="/2023/02/17/git%20config%E4%B8%ADname%E5%92%8Cemail%E9%97%AE%E9%A2%98/"/>
       <url>/2023/02/17/git%20config%E4%B8%ADname%E5%92%8Cemail%E9%97%AE%E9%A2%98/</url>
-      <content type="html"><![CDATA[<p>1233123</p>]]></content>
+      <content type="html"><![CDATA[<h3 id="单个项目设置name和email"><a href="#单个项目设置name和email" class="headerlink" title="单个项目设置name和email"></a>单个项目设置name和email</h3><p>每个项目都有一个 .git 文件夹（这个文件夹默认可能不显示）， 该文件夹下有config文件，里面包含当前项目的user.name和user.email</p><p>git config user.name “”<br>git config user.email “”</p><p>进入.git文件夹后，cat config 就可以看到设置的名字和邮件了<br><img src="/2023/02/17/git config中name和email问题/git-config中name和email问题/git-config-01.png" alt=""></p><p><img src="/2023/02/17/git config中name和email问题/git-config中name和email问题/git-config-02.png" alt=""></p><h3 id="全局设置name和email"><a href="#全局设置name和email" class="headerlink" title="全局设置name和email"></a>全局设置name和email</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#设置name</span><br><span class="line">git config --global user.name &quot;XXXX&quot;</span><br><span class="line">#设置email</span><br><span class="line">git config --global user.email &quot;XXXX&quot;</span><br></pre></td></tr></table></figure><ul><li>–global参数，表示你这台机器上所有的git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和emial地址，参考上面的单个项目的name和email配置。</li><li><p>配置好后， 可以使用</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config -l</span><br></pre></td></tr></table></figure></li><li><p>查看配置<br><img src="/2023/02/17/git config中name和email问题/git-config中name和email问题/git-config-03.jpeg" alt=""></p></li></ul><h3 id="ssh：operation-timed-out"><a href="#ssh：operation-timed-out" class="headerlink" title="ssh：operation timed out"></a>ssh：operation timed out</h3><p><img src="/2023/02/17/git config中name和email问题/git-config中name和email问题/ssh：operation%20timed%20out.png" alt=""></p><p>偶然间就突然报了上面的错误， 我没有改动什么呀～<br>最后知道原因了， 是因为公司的项目设置了ip的限制，不能使用ssh了。<br>这种情况只能添加ip，但是我移动一个地方就要改动一次ip，这种太复杂了。 我就先把ssh改为https吧</p><p>使用下面的语句更改</p><h4 id="ssh改为https"><a href="#ssh改为https" class="headerlink" title="ssh改为https"></a>ssh改为https</h4><p>git remote set-url origin <a href="http://gitlab.*************ui.git" target="_blank" rel="noopener">http://gitlab.*************ui.git</a></p><h4 id="https改为ssh"><a href="#https改为ssh" class="headerlink" title="https改为ssh"></a>https改为ssh</h4><p>git remote set-url origin git@gitlab.<strong><strong>*</strong></strong>-ui.git</p>]]></content>
       
+      <categories>
+          
+          <category> 技术，git </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 问题 </tag>
+            
+        </tags>
       
     </entry>
     
