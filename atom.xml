@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Lifuzhen.github.io/"/>
-  <updated>2023-03-31T11:35:00.951Z</updated>
+  <updated>2023-07-11T13:30:06.765Z</updated>
   <id>https://Lifuzhen.github.io/</id>
   
   <author>
@@ -15,6 +15,79 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ios手机显示new Date()解析的日期是NaN</title>
+    <link href="https://Lifuzhen.github.io/2023/07/11/ios%E6%89%8B%E6%9C%BA%E6%98%BE%E7%A4%BAnew%20Date()%E8%A7%A3%E6%9E%90%E7%9A%84%E6%97%A5%E6%9C%9F%E6%98%AFNaN/"/>
+    <id>https://Lifuzhen.github.io/2023/07/11/ios手机显示new Date()解析的日期是NaN/</id>
+    <published>2023-07-11T13:23:00.000Z</published>
+    <updated>2023-07-11T13:30:06.765Z</updated>
+    
+    <content type="html"><![CDATA[<p>开发活动过程中用到了倒计时，测试过程都是正常的，结果活动上线后有人使用iphone13 mini访问发现抢购模块的倒计时显示有问题,显示了NaN </p><p><img src="/2023/07/11/ios手机显示new Date()解析的日期是NaN/ios手机显示new-Date-解析的日期是NaN/img.png" alt=""></p><p>后来排查后发现是手机兼容性问题</p><p>ios系统不支持2023-07-30这样格式的时间导致出现的这个问题,ios识别2023/07/30这样的格式</p><p>那就拿代码开刀<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//前</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">'2023-07-30 12:00:00'</span>).getTime()</span><br><span class="line"><span class="comment">//后</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">'2023-07-30 12:00:00'</span>.replace(<span class="regexp">/-/g</span>, <span class="string">'/'</span>)).getTime()</span><br></pre></td></tr></table></figure></p><p>结果这样就可以了， 果然兼容性最难搞</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;开发活动过程中用到了倒计时，测试过程都是正常的，结果活动上线后有人使用iphone13 mini访问发现抢购模块的倒计时显示有问题,显示了NaN &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/2023/07/11/ios手机显示new Date()解析的日期是NaN/ios手机显示
+      
+    
+    </summary>
+    
+      <category term="技术，h5" scheme="https://Lifuzhen.github.io/categories/%E6%8A%80%E6%9C%AF%EF%BC%8Ch5/"/>
+    
+    
+      <category term="问题" scheme="https://Lifuzhen.github.io/tags/%E9%97%AE%E9%A2%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>报错[BABEL] Note: The code generator has</title>
+    <link href="https://Lifuzhen.github.io/2023/05/25/%E6%8A%A5%E9%94%99%5BBABEL%5D%20Note:%20The%20code%20generator%20has/"/>
+    <id>https://Lifuzhen.github.io/2023/05/25/报错[BABEL] Note: The code generator has/</id>
+    <published>2023-05-25T02:40:10.000Z</published>
+    <updated>2023-05-25T02:46:50.055Z</updated>
+    
+    <content type="html"><![CDATA[<p>– [BABEL] Note: The code generator has deoptimised the styling of <strong><strong>*</strong></strong>.development.js as it exceeds the max of 500KB.<br>字面意思是：babel警告，代码生成器已经将这块js去除了styling, 因为他超过了500KB.</p><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="attr">test</span>: <span class="regexp">/\.js$/</span>, <span class="attr">exclude</span>: <span class="regexp">/node_modules/</span>, <span class="attr">loader</span>: <span class="string">'babel-loader'</span>&#125;,</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;– [BABEL] Note: The code generator has deoptimised the styling of &lt;strong&gt;&lt;strong&gt;*&lt;/strong&gt;&lt;/strong&gt;.development.js as it exceeds the ma
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>10-正则表达式匹配</title>
+    <link href="https://Lifuzhen.github.io/2023/04/21/10-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D/"/>
+    <id>https://Lifuzhen.github.io/2023/04/21/10-正则表达式匹配/</id>
+    <published>2023-04-21T10:01:17.000Z</published>
+    <updated>2023-04-21T10:06:23.298Z</updated>
+    
+    <content type="html"><![CDATA[<p>给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 ‘.’ 和 ‘<em>‘ 的正则表达式匹配。<br>‘.’ 匹配任意单个字符<br>‘</em>‘ 匹配零个或多个前面的那一个元素<br>所谓匹配，是要涵盖 整个 字符串 s的，而不是部分字符串。</p><p>示例 1：<br>输入：s = “aa”, p = “a”<br>输出：false<br>解释：”a” 无法匹配 “aa” 整个字符串。</p><p>示例 2:<br>输入：s = “aa”, p = “a<em>“<br>输出：true<br>解释：因为 ‘</em>‘ 代表可以匹配零个或多个前面的那一个元素, 在这里前面的元素就是 ‘a’。因此，字符串 “aa” 可被视为 ‘a’ 重复了一次。</p><p>示例 3：<br>输入：s = “ab”, p = “.<em>“<br>输出：true<br>解释：”.</em>“ 表示可匹配零个或多个（’*’）任意字符（’.’）。</p><p>提示：<br>1 &lt;= s.length &lt;= 20<br>1 &lt;= p.length &lt;= 20<br>s 只包含从 a-z 的小写字母。<br>p 只包含从 a-z 的小写字母，以及字符 . 和 <em>。<br>保证每次出现字符 </em> 时，前面都匹配到有效的字符</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/regular-expression-matching" target="_blank" rel="noopener">https://leetcode.cn/problems/regular-expression-matching</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment">* @param &#123;string&#125; p</span></span><br><span class="line"><span class="comment">* @return &#123;boolean&#125;</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="keyword">const</span> isMatch = <span class="function">(<span class="params">s, p</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (s == <span class="literal">null</span> || p == <span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> sLen = s.length, pLen = p.length;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> dp = <span class="keyword">new</span> <span class="built_in">Array</span>(sLen + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; dp.length; i++) &#123;</span><br><span class="line">        dp[i] = <span class="keyword">new</span> <span class="built_in">Array</span>(pLen + <span class="number">1</span>).fill(<span class="literal">false</span>); <span class="comment">// 将项默认为false</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// base case</span></span><br><span class="line">    dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">1</span>; j &lt; pLen + <span class="number">1</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (p[j - <span class="number">1</span>] == <span class="string">"*"</span>) dp[<span class="number">0</span>][j] = dp[<span class="number">0</span>][j - <span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 迭代</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; sLen + <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">1</span>; j &lt; pLen + <span class="number">1</span>; j++) &#123;</span><br><span class="line">          <span class="keyword">if</span> (s[i - <span class="number">1</span>] == p[j - <span class="number">1</span>] || p[j - <span class="number">1</span>] == <span class="string">"."</span>) &#123;</span><br><span class="line">            dp[i][j] = dp[i - <span class="number">1</span>][j - <span class="number">1</span>];</span><br><span class="line">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (p[j - <span class="number">1</span>] == <span class="string">"*"</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[i - <span class="number">1</span>] == p[j - <span class="number">2</span>] || p[j - <span class="number">2</span>] == <span class="string">"."</span>) &#123;</span><br><span class="line">              dp[i][j] = dp[i][j - <span class="number">2</span>] || dp[i - <span class="number">1</span>][j - <span class="number">2</span>] || dp[i - <span class="number">1</span>][j];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              dp[i][j] = dp[i][j - <span class="number">2</span>];</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[sLen][pLen]; <span class="comment">// 长sLen的s串 是否匹配 长pLen的p串</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>// 作者：xiao_ben_zhu<br>// 链接：<a href="https://leetcode.cn/problems/regular-expression-matching/solution/shou-hui-tu-jie-wo-tai-nan-liao-by-hyj8/" target="_blank" rel="noopener">https://leetcode.cn/problems/regular-expression-matching/solution/shou-hui-tu-jie-wo-tai-nan-liao-by-hyj8/</a><br>// 来源：力扣（LeetCode）<br>// 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 ‘.’ 和 ‘&lt;em&gt;‘ 的正则表达式匹配。&lt;br&gt;‘.’ 匹配任意单个字符&lt;br&gt;‘&lt;/em&gt;‘ 匹配零个或多个前面的那一个元素&lt;br&gt;所谓匹配，是要涵盖 整个 字符串 s的，而不是部分字符串。&lt;/p&gt;
+&lt;p&gt;示
+      
+    
+    </summary>
+    
+      <category term="leetcode" scheme="https://Lifuzhen.github.io/categories/leetcode/"/>
+    
+    
+      <category term="leetcode" scheme="https://Lifuzhen.github.io/tags/leetcode/"/>
+    
+  </entry>
   
   <entry>
     <title>JSON.stringify()转换后包含值为undefined数据丢失的问题</title>
@@ -421,87 +494,6 @@
     </summary>
     
       <category term="前端" scheme="https://Lifuzhen.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-    
-      <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
-      <category term="css" scheme="https://Lifuzhen.github.io/tags/css/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>background-attchment移动端无效</title>
-    <link href="https://Lifuzhen.github.io/2020/01/09/background-attchment%E7%A7%BB%E5%8A%A8%E7%AB%AF%E6%97%A0%E6%95%88/"/>
-    <id>https://Lifuzhen.github.io/2020/01/09/background-attchment移动端无效/</id>
-    <published>2020-01-09T04:22:58.000Z</published>
-    <updated>2022-05-24T10:35:59.974Z</updated>
-    
-    <content type="html"><![CDATA[<p>想要实现一个移动端的页面，元素滚动，但是页面背景图不能滚动<br>能想到的就是使用“background-attachment: fixed”<br>但是在pc端是可以的，在移动端不适用</p><p>看了网上的很多列子<br>找到了一个使用body的方法，但是在ios中还是会跟随屏幕的滚动而滚动<br>所以就调整成下面，就适应了</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">//background-attachment固定背景图片手机端有效果只能放在body中</span><br><span class="line">body&#123;</span><br><span class="line">  display: block;</span><br><span class="line">  position: absolute;</span><br><span class="line">  left: 0;</span><br><span class="line">  top: 0;</span><br><span class="line">  z-index: 10;</span><br><span class="line">  width: 100%;</span><br><span class="line">&#125;</span><br><span class="line">body:before&#123;</span><br><span class="line">  content: &apos;&apos;;</span><br><span class="line">  position: fixed;</span><br><span class="line">  z-index: -1;</span><br><span class="line">  top: 0;</span><br><span class="line">  right: 0;</span><br><span class="line">  bottom: 0;</span><br><span class="line">  left: 0;</span><br><span class="line">  background-image: url(&quot;../../../assets/bg.jpg&quot;);</span><br><span class="line">  background-repeat: no-repeat;</span><br><span class="line">  background-attachment: fixed;</span><br><span class="line">  background-size: 100%, cover, cover;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;想要实现一个移动端的页面，元素滚动，但是页面背景图不能滚动&lt;br&gt;能想到的就是使用“background-attachment: fixed”&lt;br&gt;但是在pc端是可以的，在移动端不适用&lt;/p&gt;
-&lt;p&gt;看了网上的很多列子&lt;br&gt;找到了一个使用body的方法，但是在ios中还
-      
-    
-    </summary>
-    
-      <category term="前端" scheme="https://Lifuzhen.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-    
-      <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
-      <category term="css" scheme="https://Lifuzhen.github.io/tags/css/"/>
-    
-      <category term="背景图" scheme="https://Lifuzhen.github.io/tags/%E8%83%8C%E6%99%AF%E5%9B%BE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在IOS中DeviceMotionEvent失效</title>
-    <link href="https://Lifuzhen.github.io/2019/12/11/%E5%9C%A8IOS%E4%B8%ADDeviceMotionEvent%E5%A4%B1%E6%95%88/"/>
-    <id>https://Lifuzhen.github.io/2019/12/11/在IOS中DeviceMotionEvent失效/</id>
-    <published>2019-12-11T07:39:30.000Z</published>
-    <updated>2022-05-24T10:36:00.758Z</updated>
-    
-    <content type="html"><![CDATA[<p>客户提出要摇一摇自动播放视频的功能<br>在做摇一摇的时候出现了问题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//摇一摇(使用DeviceMotion事件)</span><br><span class="line">shake() &#123;</span><br><span class="line">    var speed = 15;    // 用来判定的加速度阈值，太大了则很难触发</span><br><span class="line">    var x, y, z, lastX, lastY, lastZ;</span><br><span class="line">    x = y = z = lastX = lastY = lastZ = 0;</span><br><span class="line">    window.addEventListener(&apos;devicemotion&apos;, function (event) &#123;</span><br><span class="line">        var acceleration = event.accelerationIncludingGravity;</span><br><span class="line">        x = acceleration.x;</span><br><span class="line">        y = acceleration.y;</span><br><span class="line">        if (Math.abs(x - lastX) &gt; speed || Math.abs(y - lastY) &gt; speed) &#123;</span><br><span class="line">            // 用户设备摇动了，触发响应操作</span><br><span class="line">            // 此处的判断依据是用户设备的加速度大于我们设置的阈值</span><br><span class="line">             alert(&apos;摇了&apos;);</span><br><span class="line">        &#125;</span><br><span class="line">        lastX = x;</span><br><span class="line">        lastY = y;</span><br><span class="line">    &#125;, false);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>上面这段代码在安卓手机上运行没有一点问题，但是ios上怎么都不出来效果（真的愁死）<br>后来在输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert(window.EdviceMotionEvent)</span><br></pre></td></tr></table></figure></p><p>发现ios上是有这个事件的，但就是没有弹出“摇了”这个弹出框</p><p>后来发现ios新系统版本摇一摇事件需要https协议（真的是被搞死）</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">问题：window.DeviceMotionEvent 在ios中是有定义的，但就是不触发 devicemotion 事件；</span><br><span class="line">解决：使用 https 协议！</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;客户提出要摇一摇自动播放视频的功能&lt;br&gt;在做摇一摇的时候出现了问题：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;
-      
-    
-    </summary>
-    
-    
-      <category term="devicemotion" scheme="https://Lifuzhen.github.io/tags/devicemotion/"/>
-    
-      <category term="ios" scheme="https://Lifuzhen.github.io/tags/ios/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>position为fixed时设置z-index失效</title>
-    <link href="https://Lifuzhen.github.io/2019/11/26/position%E4%B8%BAfixed%E6%97%B6%E8%AE%BE%E7%BD%AEz-index%E5%A4%B1%E6%95%88/"/>
-    <id>https://Lifuzhen.github.io/2019/11/26/position为fixed时设置z-index失效/</id>
-    <published>2019-11-26T10:22:52.000Z</published>
-    <updated>2022-05-24T10:36:01.106Z</updated>
-    
-    <content type="html"><![CDATA[<p>今天在改bug的时候遇到了个z-index的问题，怎么都调试不好，然后就上网百度<br>bug: 一个div元素下两个子元素，其中一个子元素fixed定位，另一个没有办法执行click方法</p><p>原来谷歌浏览器在设置position:fixed;后会触发元素创建一个新的层叠上下文，并且当成一个整体在父层叠上下文中进行比较。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;a&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;b&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p><p>如上面的dom结构，当给b设置了position:fixed;属性后，会触发创建一个新的层叠上下文，它的父层叠上下文变成了a，所以b只能在a的内部进行层叠比较。这也就是大家熟听的“从父原则”。</p><p>所以本来所有元素都在root内比较，改为fixed之后只能在父级元素内比较，而父级元素没有设置z-index，所以无法比较。</p><p>所以解决方案是给父级元素设置z-index，一般设置为0就可以了。</p><p>tips：</p><ol><li>z-index只有在设置了position为relative,absolute,fixed时才会有效。 </li><li>z-index的“从父原则”。当你发现把z-index设的多大都没用时，看看其父元素是否设置了有效的z-index，当然别忘了先看看自身是否设置了position。</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;今天在改bug的时候遇到了个z-index的问题，怎么都调试不好，然后就上网百度&lt;br&gt;bug: 一个div元素下两个子元素，其中一个子元素fixed定位，另一个没有办法执行click方法&lt;/p&gt;
-&lt;p&gt;原来谷歌浏览器在设置position:fixed;后会触发元素创建一个
-      
-    
-    </summary>
     
     
       <category term="前端" scheme="https://Lifuzhen.github.io/tags/%E5%89%8D%E7%AB%AF/"/>

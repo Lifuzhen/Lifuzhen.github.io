@@ -3,6 +3,57 @@
   
     
     <entry>
+      <title>ios手机显示new Date()解析的日期是NaN</title>
+      <link href="/2023/07/11/ios%E6%89%8B%E6%9C%BA%E6%98%BE%E7%A4%BAnew%20Date()%E8%A7%A3%E6%9E%90%E7%9A%84%E6%97%A5%E6%9C%9F%E6%98%AFNaN/"/>
+      <url>/2023/07/11/ios%E6%89%8B%E6%9C%BA%E6%98%BE%E7%A4%BAnew%20Date()%E8%A7%A3%E6%9E%90%E7%9A%84%E6%97%A5%E6%9C%9F%E6%98%AFNaN/</url>
+      <content type="html"><![CDATA[<p>开发活动过程中用到了倒计时，测试过程都是正常的，结果活动上线后有人使用iphone13 mini访问发现抢购模块的倒计时显示有问题,显示了NaN </p><p><img src="/2023/07/11/ios手机显示new Date()解析的日期是NaN/ios手机显示new-Date-解析的日期是NaN/img.png" alt=""></p><p>后来排查后发现是手机兼容性问题</p><p>ios系统不支持2023-07-30这样格式的时间导致出现的这个问题,ios识别2023/07/30这样的格式</p><p>那就拿代码开刀<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//前</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">'2023-07-30 12:00:00'</span>).getTime()</span><br><span class="line"><span class="comment">//后</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">'2023-07-30 12:00:00'</span>.replace(<span class="regexp">/-/g</span>, <span class="string">'/'</span>)).getTime()</span><br></pre></td></tr></table></figure></p><p>结果这样就可以了， 果然兼容性最难搞</p>]]></content>
+      
+      <categories>
+          
+          <category> 技术，h5 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 问题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>报错[BABEL] Note: The code generator has</title>
+      <link href="/2023/05/25/%E6%8A%A5%E9%94%99%5BBABEL%5D%20Note:%20The%20code%20generator%20has/"/>
+      <url>/2023/05/25/%E6%8A%A5%E9%94%99%5BBABEL%5D%20Note:%20The%20code%20generator%20has/</url>
+      <content type="html"><![CDATA[<p>– [BABEL] Note: The code generator has deoptimised the styling of <strong><strong>*</strong></strong>.development.js as it exceeds the max of 500KB.<br>字面意思是：babel警告，代码生成器已经将这块js去除了styling, 因为他超过了500KB.</p><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="attr">test</span>: <span class="regexp">/\.js$/</span>, <span class="attr">exclude</span>: <span class="regexp">/node_modules/</span>, <span class="attr">loader</span>: <span class="string">'babel-loader'</span>&#125;,</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+    </entry>
+    
+    <entry>
+      <title>10-正则表达式匹配</title>
+      <link href="/2023/04/21/10-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D/"/>
+      <url>/2023/04/21/10-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D/</url>
+      <content type="html"><![CDATA[<p>给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 ‘.’ 和 ‘<em>‘ 的正则表达式匹配。<br>‘.’ 匹配任意单个字符<br>‘</em>‘ 匹配零个或多个前面的那一个元素<br>所谓匹配，是要涵盖 整个 字符串 s的，而不是部分字符串。</p><p>示例 1：<br>输入：s = “aa”, p = “a”<br>输出：false<br>解释：”a” 无法匹配 “aa” 整个字符串。</p><p>示例 2:<br>输入：s = “aa”, p = “a<em>“<br>输出：true<br>解释：因为 ‘</em>‘ 代表可以匹配零个或多个前面的那一个元素, 在这里前面的元素就是 ‘a’。因此，字符串 “aa” 可被视为 ‘a’ 重复了一次。</p><p>示例 3：<br>输入：s = “ab”, p = “.<em>“<br>输出：true<br>解释：”.</em>“ 表示可匹配零个或多个（’*’）任意字符（’.’）。</p><p>提示：<br>1 &lt;= s.length &lt;= 20<br>1 &lt;= p.length &lt;= 20<br>s 只包含从 a-z 的小写字母。<br>p 只包含从 a-z 的小写字母，以及字符 . 和 <em>。<br>保证每次出现字符 </em> 时，前面都匹配到有效的字符</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/regular-expression-matching" target="_blank" rel="noopener">https://leetcode.cn/problems/regular-expression-matching</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment">* @param &#123;string&#125; p</span></span><br><span class="line"><span class="comment">* @return &#123;boolean&#125;</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="keyword">const</span> isMatch = <span class="function">(<span class="params">s, p</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (s == <span class="literal">null</span> || p == <span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> sLen = s.length, pLen = p.length;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> dp = <span class="keyword">new</span> <span class="built_in">Array</span>(sLen + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; dp.length; i++) &#123;</span><br><span class="line">        dp[i] = <span class="keyword">new</span> <span class="built_in">Array</span>(pLen + <span class="number">1</span>).fill(<span class="literal">false</span>); <span class="comment">// 将项默认为false</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// base case</span></span><br><span class="line">    dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">1</span>; j &lt; pLen + <span class="number">1</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (p[j - <span class="number">1</span>] == <span class="string">"*"</span>) dp[<span class="number">0</span>][j] = dp[<span class="number">0</span>][j - <span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 迭代</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; sLen + <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">1</span>; j &lt; pLen + <span class="number">1</span>; j++) &#123;</span><br><span class="line">          <span class="keyword">if</span> (s[i - <span class="number">1</span>] == p[j - <span class="number">1</span>] || p[j - <span class="number">1</span>] == <span class="string">"."</span>) &#123;</span><br><span class="line">            dp[i][j] = dp[i - <span class="number">1</span>][j - <span class="number">1</span>];</span><br><span class="line">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (p[j - <span class="number">1</span>] == <span class="string">"*"</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[i - <span class="number">1</span>] == p[j - <span class="number">2</span>] || p[j - <span class="number">2</span>] == <span class="string">"."</span>) &#123;</span><br><span class="line">              dp[i][j] = dp[i][j - <span class="number">2</span>] || dp[i - <span class="number">1</span>][j - <span class="number">2</span>] || dp[i - <span class="number">1</span>][j];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              dp[i][j] = dp[i][j - <span class="number">2</span>];</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[sLen][pLen]; <span class="comment">// 长sLen的s串 是否匹配 长pLen的p串</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>// 作者：xiao_ben_zhu<br>// 链接：<a href="https://leetcode.cn/problems/regular-expression-matching/solution/shou-hui-tu-jie-wo-tai-nan-liao-by-hyj8/" target="_blank" rel="noopener">https://leetcode.cn/problems/regular-expression-matching/solution/shou-hui-tu-jie-wo-tai-nan-liao-by-hyj8/</a><br>// 来源：力扣（LeetCode）<br>// 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>]]></content>
+      
+      <categories>
+          
+          <category> leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> leetcode </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>JSON.stringify()转换后包含值为undefined数据丢失的问题</title>
       <link href="/2023/03/31/JSON.stringify()%E8%BD%AC%E6%8D%A2%E5%90%8E%E5%8C%85%E5%90%AB%E5%80%BC%E4%B8%BAundefined%E6%95%B0%E6%8D%AE%E4%B8%A2%E5%A4%B1%E7%9A%84%E9%97%AE%E9%A2%98/"/>
       <url>/2023/03/31/JSON.stringify()%E8%BD%AC%E6%8D%A2%E5%90%8E%E5%8C%85%E5%90%AB%E5%80%BC%E4%B8%BAundefined%E6%95%B0%E6%8D%AE%E4%B8%A2%E5%A4%B1%E7%9A%84%E9%97%AE%E9%A2%98/</url>
