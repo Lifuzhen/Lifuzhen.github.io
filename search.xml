@@ -3,6 +3,27 @@
   
     
     <entry>
+      <title>12-整数转罗马数字</title>
+      <link href="/2023/07/13/12-%E6%95%B4%E6%95%B0%E8%BD%AC%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97/"/>
+      <url>/2023/07/13/12-%E6%95%B4%E6%95%B0%E8%BD%AC%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97/</url>
+      <content type="html"><![CDATA[<p>罗马数字包含以下七种字符：I，V，X，L，C，D和M。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">字符          数值</span><br><span class="line">I             <span class="number">1</span></span><br><span class="line">V             <span class="number">5</span></span><br><span class="line">X             <span class="number">10</span></span><br><span class="line">L             <span class="number">50</span></span><br><span class="line">C             <span class="number">100</span></span><br><span class="line">D             <span class="number">500</span></span><br><span class="line">M             <span class="number">1000</span></span><br></pre></td></tr></table></figure></p><p>例如， 罗马数字 2 写做II，即为两个并列的 1。 12 写做XII，即为X+II。 27 写做XXVII, 即为XX+V+II。 </p><p>通常情况下，罗马数字中小的数字在大的数字的右边。 但也存在特例，例如 4 不写做IIII，而是IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。<br>同样地，数字 9 表示为IX。 这个特殊的规则只适用于以下六种情况：  </p><ul><li>I 可以放在V(5) 和X(10) 的左边，来表示 4 和 9。 </li><li>X 可以放在L(50) 和C(100) 的左边，来表示 40 和90。</li><li>C 可以放在D(500) 和M(1000) 的左边，来表示400 和900。<br>给你一个整数，将其转为罗马数字。 </li></ul><p>示例1:<br>输入:num = 3 输出: “III” </p><p>示例2:<br>输入:num = 4 输出: “IV” </p><p>示例3:<br>输入:num = 9 输出: “IX” </p><p>示例4:<br>输入:num = 58 输出: “LVIII”<br>解释: L = 50, V = 5, III = 3. </p><p>示例5:<br>输入:num = 1994 输出: “MCMXCIV”<br>解释: M = 1000, CM = 900, XC = 90, IV = 4.<br>提示：  1 &lt;= num &lt;= 3999  </p><p>来源：力扣（LeetCode） 链接：<a href="https://leetcode.cn/problems/integer-to-roman" target="_blank" rel="noopener">https://leetcode.cn/problems/integer-to-roman</a></p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; num</span></span><br><span class="line"><span class="comment"> * @return &#123;string&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> intToRoman = <span class="function"><span class="keyword">function</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> arr = [[<span class="number">1000</span>, <span class="string">'M'</span>],[<span class="number">900</span>, <span class="string">'CM'</span>],[<span class="number">500</span>, <span class="string">'D'</span>],[<span class="number">400</span>, <span class="string">'CD'</span>],[<span class="number">100</span>, <span class="string">'C'</span>],[<span class="number">90</span>, <span class="string">'XC'</span>],[<span class="number">50</span>, <span class="string">'L'</span>],[<span class="number">40</span>, <span class="string">'XL'</span>],[<span class="number">10</span>, <span class="string">'X'</span>],[<span class="number">9</span>, <span class="string">'IX'</span>],[<span class="number">5</span>, <span class="string">'V'</span>],[<span class="number">4</span>, <span class="string">'IV'</span>],[<span class="number">1</span>, <span class="string">'I'</span>]];</span><br><span class="line">    <span class="keyword">const</span> result = [];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">const</span> [value, symbol] <span class="keyword">of</span> arr )&#123;</span><br><span class="line">        <span class="keyword">if</span>(num &gt;= value)&#123;</span><br><span class="line">            num-=value;</span><br><span class="line">            result.push(symbol)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(num == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result.join(<span class="string">''</span>)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      <categories>
+          
+          <category> leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> leetcode </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>ios手机显示new Date()解析的日期是NaN</title>
       <link href="/2023/07/11/ios%E6%89%8B%E6%9C%BA%E6%98%BE%E7%A4%BAnew%20Date()%E8%A7%A3%E6%9E%90%E7%9A%84%E6%97%A5%E6%9C%9F%E6%98%AFNaN/"/>
       <url>/2023/07/11/ios%E6%89%8B%E6%9C%BA%E6%98%BE%E7%A4%BAnew%20Date()%E8%A7%A3%E6%9E%90%E7%9A%84%E6%97%A5%E6%9C%9F%E6%98%AFNaN/</url>
@@ -316,9 +337,9 @@
       
         <tags>
             
-            <tag> 前端 </tag>
-            
             <tag> css </tag>
+            
+            <tag> 前端 </tag>
             
         </tags>
       
@@ -339,9 +360,9 @@
       
         <tags>
             
-            <tag> 前端 </tag>
-            
             <tag> css </tag>
+            
+            <tag> 前端 </tag>
             
             <tag> 背景图 </tag>
             
@@ -375,9 +396,9 @@
       
         <tags>
             
-            <tag> 前端 </tag>
-            
             <tag> css </tag>
+            
+            <tag> 前端 </tag>
             
         </tags>
       
@@ -419,9 +440,9 @@
       
         <tags>
             
-            <tag> js </tag>
-            
             <tag> 前端 </tag>
+            
+            <tag> js </tag>
             
         </tags>
       
@@ -459,11 +480,11 @@
       
         <tags>
             
-            <tag> js </tag>
+            <tag> css </tag>
             
             <tag> 前端 </tag>
             
-            <tag> css </tag>
+            <tag> js </tag>
             
             <tag> 微信 </tag>
             
@@ -522,9 +543,9 @@
       
         <tags>
             
-            <tag> 前端 </tag>
-            
             <tag> css </tag>
+            
+            <tag> 前端 </tag>
             
         </tags>
       
@@ -545,9 +566,9 @@
       
         <tags>
             
-            <tag> 前端 </tag>
-            
             <tag> css </tag>
+            
+            <tag> 前端 </tag>
             
         </tags>
       
@@ -568,9 +589,9 @@
       
         <tags>
             
-            <tag> 前端 </tag>
-            
             <tag> css </tag>
+            
+            <tag> 前端 </tag>
             
         </tags>
       
@@ -756,9 +777,9 @@
       
         <tags>
             
-            <tag> js </tag>
-            
             <tag> 前端 </tag>
+            
+            <tag> js </tag>
             
         </tags>
       
@@ -800,9 +821,9 @@
       
         <tags>
             
-            <tag> 前端 </tag>
-            
             <tag> css </tag>
+            
+            <tag> 前端 </tag>
             
         </tags>
       
