@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Lifuzhen.github.io/"/>
-  <updated>2023-07-28T13:32:34.039Z</updated>
+  <updated>2023-07-31T12:35:43.266Z</updated>
   <id>https://Lifuzhen.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>前端获取路径参数中文乱码</title>
+    <link href="https://Lifuzhen.github.io/2023/07/31/%E5%89%8D%E7%AB%AF%E8%8E%B7%E5%8F%96%E8%B7%AF%E5%BE%84%E5%8F%82%E6%95%B0%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"/>
+    <id>https://Lifuzhen.github.io/2023/07/31/前端获取路径参数中文乱码/</id>
+    <published>2023-07-31T12:33:19.000Z</published>
+    <updated>2023-07-31T12:35:43.266Z</updated>
+    
+    <content type="html"><![CDATA[<p>前端获取路径参数中文乱码<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取路径参数公共方法</span></span><br><span class="line">getUrlParams(name: <span class="built_in">string</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> search = <span class="built_in">window</span>.location.search.substr(<span class="number">1</span>) || <span class="built_in">window</span>.location.hash.split(<span class="string">'?'</span>)[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">if</span> (!search) <span class="keyword">return</span> <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">let</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'(^|&amp;)'</span> + name + <span class="string">'=([^&amp;]*)(&amp;|$)'</span>);</span><br><span class="line">    <span class="keyword">let</span> r = search.match(reg);</span><br><span class="line">    <span class="keyword">if</span> (r != <span class="literal">null</span>) <span class="keyword">return</span> <span class="built_in">unescape</span>(r[<span class="number">2</span>]);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>浏览器访问 : localhost:8989/index.html?projectId=123&amp;type=1&amp;storeId=222&amp;storeName=瑞幸<br>获取到的参数值<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.getUrlParams(<span class="string">'projectId'</span>); <span class="comment">//123</span></span><br><span class="line"><span class="keyword">this</span>.getUrlParams(<span class="string">'type'</span>); <span class="comment">//1</span></span><br><span class="line"><span class="keyword">this</span>.getUrlParams(<span class="string">'storeId'</span>); <span class="comment">//222</span></span><br><span class="line"><span class="keyword">this</span>.getUrlParams(<span class="string">'storeName'</span>); <span class="comment">//ç  å¹¸</span></span><br></pre></td></tr></table></figure></p><p>查询mdn的网站, 上面显示<br>备注： 不要使用unescape去解码 URLS，使用decodeURI或decodeURIComponent替代<br>所以就使用decodeURL替换<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取链接参数值</span></span><br><span class="line">getUrlParams(name: <span class="built_in">string</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> search =</span><br><span class="line">        <span class="built_in">window</span>.location.search.substr(<span class="number">1</span>) ||</span><br><span class="line">        <span class="built_in">window</span>.location.hash.split(<span class="string">'?'</span>)[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">if</span> (!search) <span class="keyword">return</span> <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">let</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'(^|&amp;)'</span> + name + <span class="string">'=([^&amp;]*)(&amp;|$)'</span>);</span><br><span class="line">    <span class="keyword">let</span> r = search.match(reg);</span><br><span class="line">    <span class="keyword">if</span> (r != <span class="literal">null</span>) <span class="keyword">return</span> <span class="built_in">decodeURI</span>(r[<span class="number">2</span>]);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">//?projectId=123&amp;type=1&amp;storeId=222&amp;storeName=瑞幸</span></span><br><span class="line"><span class="keyword">this</span>.getUrlParams(<span class="string">'projectId'</span>); <span class="comment">//123</span></span><br><span class="line"><span class="keyword">this</span>.getUrlParams(<span class="string">'type'</span>); <span class="comment">//1</span></span><br><span class="line"><span class="keyword">this</span>.getUrlParams(<span class="string">'storeId'</span>); <span class="comment">//222</span></span><br><span class="line"><span class="keyword">this</span>.getUrlParams(<span class="string">'storeName'</span>); <span class="comment">//瑞幸</span></span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;前端获取路径参数中文乱码&lt;br&gt;&lt;figure class=&quot;highlight ts&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>13-罗马数字转整数</title>
@@ -472,27 +493,6 @@
       
         &lt;p&gt;过年后回来的时候做了一个摇一摇的H5小游戏。因为我使用的是安卓手机，一直没有发现在苹果手机上不能使用。&lt;br&gt;刚开是以为是http和https的问题，但是在ios上即使使用https开头的链接然后还是不能摇~&lt;/p&gt;
 &lt;p&gt;后来网上找了原因说是ios13+的版本，浏览器对设
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>inline-block间隙</title>
-    <link href="https://Lifuzhen.github.io/2020/07/09/inline-block%E9%97%B4%E9%9A%99/"/>
-    <id>https://Lifuzhen.github.io/2020/07/09/inline-block间隙/</id>
-    <published>2020-07-09T11:12:04.000Z</published>
-    <updated>2022-05-24T10:35:59.839Z</updated>
-    
-    <content type="html"><![CDATA[<p>我针对一些元素使用inline-block要比float频繁。img标签本身就是inline-block属性，所以页面中使用到img标签的时候经常会出现间隙问题。<br>最近写的h5页面多了，遇到这个问题的次数就越来越多了。<br>最典型的就是图片，当我两个图片要连接时，中间就出现了缝隙。审查元素我并没有设置间距。然后就找问题的原因，发现是典型的换行符/空格间隙问题。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">&lt;title&gt;&lt;/title&gt;</span><br><span class="line">&lt;!--适应移动端--&gt;</span><br><span class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</span><br><span class="line">&lt;!--css样式--&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">*&#123;</span><br><span class="line">    margin: 0;</span><br><span class="line">    padding: 0;</span><br><span class="line">&#125;</span><br><span class="line">ul&#123;</span><br><span class="line">    list-style: none;</span><br><span class="line">&#125;</span><br><span class="line">li&#123;</span><br><span class="line">    display: inline-block;</span><br><span class="line">    width: 100px;</span><br><span class="line">    height: 100px;</span><br><span class="line">    background: #108ee9;</span><br><span class="line">    color: #ffffff;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li&gt;llll&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;ffff&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;zzzz&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;7777&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;1111&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;9999&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure><p><img src="/2020/07/09/inline-block间隙/01.jpg" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;我针对一些元素使用inline-block要比float频繁。img标签本身就是inline-block属性，所以页面中使用到img标签的时候经常会出现间隙问题。&lt;br&gt;最近写的h5页面多了，遇到这个问题的次数就越来越多了。&lt;br&gt;最典型的就是图片，当我两个图片要连接时，中
       
     
     </summary>

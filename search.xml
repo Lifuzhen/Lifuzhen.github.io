@@ -3,6 +3,15 @@
   
     
     <entry>
+      <title>前端获取路径参数中文乱码</title>
+      <link href="/2023/07/31/%E5%89%8D%E7%AB%AF%E8%8E%B7%E5%8F%96%E8%B7%AF%E5%BE%84%E5%8F%82%E6%95%B0%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"/>
+      <url>/2023/07/31/%E5%89%8D%E7%AB%AF%E8%8E%B7%E5%8F%96%E8%B7%AF%E5%BE%84%E5%8F%82%E6%95%B0%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/</url>
+      <content type="html"><![CDATA[<p>前端获取路径参数中文乱码<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取路径参数公共方法</span></span><br><span class="line">getUrlParams(name: <span class="built_in">string</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> search = <span class="built_in">window</span>.location.search.substr(<span class="number">1</span>) || <span class="built_in">window</span>.location.hash.split(<span class="string">'?'</span>)[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">if</span> (!search) <span class="keyword">return</span> <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">let</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'(^|&amp;)'</span> + name + <span class="string">'=([^&amp;]*)(&amp;|$)'</span>);</span><br><span class="line">    <span class="keyword">let</span> r = search.match(reg);</span><br><span class="line">    <span class="keyword">if</span> (r != <span class="literal">null</span>) <span class="keyword">return</span> <span class="built_in">unescape</span>(r[<span class="number">2</span>]);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>浏览器访问 : localhost:8989/index.html?projectId=123&amp;type=1&amp;storeId=222&amp;storeName=瑞幸<br>获取到的参数值<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.getUrlParams(<span class="string">'projectId'</span>); <span class="comment">//123</span></span><br><span class="line"><span class="keyword">this</span>.getUrlParams(<span class="string">'type'</span>); <span class="comment">//1</span></span><br><span class="line"><span class="keyword">this</span>.getUrlParams(<span class="string">'storeId'</span>); <span class="comment">//222</span></span><br><span class="line"><span class="keyword">this</span>.getUrlParams(<span class="string">'storeName'</span>); <span class="comment">//ç  å¹¸</span></span><br></pre></td></tr></table></figure></p><p>查询mdn的网站, 上面显示<br>备注： 不要使用unescape去解码 URLS，使用decodeURI或decodeURIComponent替代<br>所以就使用decodeURL替换<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取链接参数值</span></span><br><span class="line">getUrlParams(name: <span class="built_in">string</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> search =</span><br><span class="line">        <span class="built_in">window</span>.location.search.substr(<span class="number">1</span>) ||</span><br><span class="line">        <span class="built_in">window</span>.location.hash.split(<span class="string">'?'</span>)[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">if</span> (!search) <span class="keyword">return</span> <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">let</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'(^|&amp;)'</span> + name + <span class="string">'=([^&amp;]*)(&amp;|$)'</span>);</span><br><span class="line">    <span class="keyword">let</span> r = search.match(reg);</span><br><span class="line">    <span class="keyword">if</span> (r != <span class="literal">null</span>) <span class="keyword">return</span> <span class="built_in">decodeURI</span>(r[<span class="number">2</span>]);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">//?projectId=123&amp;type=1&amp;storeId=222&amp;storeName=瑞幸</span></span><br><span class="line"><span class="keyword">this</span>.getUrlParams(<span class="string">'projectId'</span>); <span class="comment">//123</span></span><br><span class="line"><span class="keyword">this</span>.getUrlParams(<span class="string">'type'</span>); <span class="comment">//1</span></span><br><span class="line"><span class="keyword">this</span>.getUrlParams(<span class="string">'storeId'</span>); <span class="comment">//222</span></span><br><span class="line"><span class="keyword">this</span>.getUrlParams(<span class="string">'storeName'</span>); <span class="comment">//瑞幸</span></span><br></pre></td></tr></table></figure></p>]]></content>
+      
+      
+    </entry>
+    
+    <entry>
       <title>13-罗马数字转整数</title>
       <link href="/2023/07/28/13-%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%95%B4%E6%95%B0/"/>
       <url>/2023/07/28/13-%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%95%B4%E6%95%B0/</url>
@@ -461,9 +470,9 @@
       
         <tags>
             
-            <tag> js </tag>
-            
             <tag> 前端 </tag>
+            
+            <tag> js </tag>
             
         </tags>
       
@@ -501,11 +510,11 @@
       
         <tags>
             
-            <tag> js </tag>
-            
             <tag> 前端 </tag>
             
             <tag> css </tag>
+            
+            <tag> js </tag>
             
             <tag> 微信 </tag>
             
@@ -798,9 +807,9 @@
       
         <tags>
             
-            <tag> js </tag>
-            
             <tag> 前端 </tag>
+            
+            <tag> js </tag>
             
         </tags>
       
